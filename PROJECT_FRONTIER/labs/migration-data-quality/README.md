@@ -1,10 +1,19 @@
 # Migration Data Quality Laboratory
 
-A small Python-standard-library demonstration for validating **fictional** migration-event records against the Project Frontier v0.1 data contract.
+A small Python-standard-library demonstration for validating **fictional** migration-event records against the Project Frontier **v0.2** data contract.
 
 ## Scope
 
 This is a data-quality teaching lab, not an immigration product, operational border system, migration statistics source, identity verifier or risk-scoring tool. It accepts no personal identity fields and uses no real traveller, passport, NIN, biometric, personnel or government operational data.
+
+## Current version and documents
+
+The current implementation and regression suite are v0.2:
+- [Data Contract v0.2](DATA_CONTRACT_v0.2.md)
+- [Test Plan v0.2](TEST_PLAN_v0.2.md)
+- [Independent Review Request](REVIEW_REQUEST.md)
+
+The unversioned `DATA_CONTRACT.md` and `TEST_PLAN.md` are retained as historical v0.1 documents; they do not describe every v0.2 rule.
 
 ## Run
 
@@ -29,5 +38,6 @@ Outputs are deterministic for the same input and explicit reference time. The sa
 - Ingestion lag and other metrics must not be interpreted as operational performance without validated context.
 - No fuzzy matching, person resolution, enforcement inference, external network calls or live data integrations are implemented.
 - Invalid UTF-8 input is rejected at the file-reader boundary; it is not silently repaired.
+- The `source_record_id` token pattern is a format constraint, not proof that a record is synthetic. Only generated fictional fixtures may be used.
 
-See DATA_CONTRACT.md and TEST_PLAN.md for the complete v0.1 rules and acceptance criteria.
+The v0.2 implementation passed 45 regression tests and its synthetic CLI fixture in GitHub Actions run 44176377842 on Python 3.12. This validates only the tested cases, not production readiness or real-world data quality. Independent human review remains outstanding.
