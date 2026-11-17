@@ -39,7 +39,7 @@ No other fields are accepted in v0.1. Unknown fields are rejected rather than si
 
 ## 4. Time and provenance semantics
 
-- Timestamps must parse as RFC 3339/ISO 8601 values with an explicit offset; naive local timestamps are invalid.
+- Timestamps must parse as RFC 3339 values with an explicit offset and ASCII timestamp digits; naive local timestamps and non-RFC3339 syntax are invalid.
 - The pipeline does not copy raw record payloads into diagnostics. It emits only the input row number, a record ID when it matches the synthetic ID pattern, stable issue codes and disposition; accepted output contains UTC-normalised timestamps.
 - `event_at` is when the fictional event is said to have occurred.
 - `ingested_at` is when the fictional source says it entered that source's dataset.
