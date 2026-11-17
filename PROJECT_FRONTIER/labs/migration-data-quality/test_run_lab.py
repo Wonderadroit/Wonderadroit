@@ -49,7 +49,7 @@ class CliTests(unittest.TestCase):
             source.write_text("", encoding="utf-8")
             output = root / "out"
             with self.assertRaises(SystemExit) as error:
-                self.invoke(source, output, "2026-11-17T12:00:00")
+                self.invoke(source, output, "2026-11-17 12:00:00+00:00")
             self.assertEqual(error.exception.code, 2)
             self.assertFalse(output.exists())
 
