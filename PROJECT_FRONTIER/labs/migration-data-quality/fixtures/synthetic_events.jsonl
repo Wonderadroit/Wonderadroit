@@ -1,0 +1,3 @@
+{"record_id":"SYN-0001","event_type":"entry","event_at":"2026-11-16T10:00:00Z","ingested_at":"2026-11-16T10:05:00Z","source_system":"SYNTH-A","source_record_id":"SRC-001","origin_country":"GH","destination_country":"NG","transport_mode":"air"}
+{"record_id":"SYN-0001","event_type":"entry","event_at":"2026-11-16T10:00:00Z","ingested_at":"2026-11-16T10:05:00Z","source_system":"SYNTH-A","source_record_id":"SRC-001","origin_country":"GH","destination_country":"NG","transport_mode":"air"}
+{"record_id":"SYN-0003","event_type":"exit","event_at":"2026-11-16T11:00:00Z","ingested_at":"2026-11-16T11:05:00Z","source_system":"SYNTH-B","source_record_id":"SRC-003","origin_country":"NG","destination_country":"NG","transport_mode":"land"}

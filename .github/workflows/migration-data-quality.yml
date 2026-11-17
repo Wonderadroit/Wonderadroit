@@ -1,0 +1,35 @@
+name: Migration data quality lab
+
+on:
+  push:
+    paths:
+      - "PROJECT_FRONTIER/labs/migration-data-quality/**"
+      - ".github/workflows/migration-data-quality.yml"
+  pull_request:
+    paths:
+      - "PROJECT_FRONTIER/labs/migration-data-quality/**"
+      - ".github/workflows/migration-data-quality.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  migration-data-quality-tests:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: PROJECT_FRONTIER/labs/migration-data-quality
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Run regression suite
+        run: python -m unittest -v
+      - name: Run synthetic fixture
+        run: |
+          python run_lab.py --input fixtures/synthetic_events.jsonl --output-dir build --reference-time 2026-11-17T12:00:00Z
+          test -s build/accepted.jsonl
+          test -s build/diagnostics.jsonl
+          test -s build/summary.json
