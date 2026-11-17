@@ -266,6 +266,15 @@ class ValidatorTests(unittest.TestCase):
         self.assertTrue(all("RECORD_ID_CONFLICT" in d["issue_codes"] for d in diagnostics))
         self.assertEqual(summary["record_id_conflict_groups"], 1)
 
+    def test_invalid_record_id_does_not_trigger_duplicate_source_reference(self):
+        valid = record()
+        invalid = record(record_id="not-synthetic")
+        accepted, diagnostics, _ = run_rows(valid, invalid)
+        self.assertEqual([row["record_id"] for row in accepted], ["SYN-0001"])
+        self.assertIn("INVALID_RECORD_ID", diagnostics[1]["issue_codes"])
+        self.assertNotIn("DUPLICATE_SOURCE_REFERENCE", diagnostics[0]["issue_codes"])
+        self.assertNotIn("DUPLICATE_SOURCE_REFERENCE", diagnostics[1]["issue_codes"])
+
     def test_duplicate_metrics_include_parseable_objects_with_other_errors(self):
         first = record()
         second = record(transport_mode="rail")
