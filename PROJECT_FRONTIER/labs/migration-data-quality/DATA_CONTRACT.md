@@ -31,7 +31,7 @@ One row represents one fictional movement-event record. It does not represent a 
 | ingested_at | string | yes | RFC 3339 timestamp with explicit UTC offset; normalise to UTC |
 | source_system | string | yes | Controlled synthetic source label: `SYNTH-A`, `SYNTH-B`, or `SYNTH-C` |
 | source_record_id | string | yes | Synthetic source-local identifier; 1–64 chars |
-| origin_country | string | yes | Uppercase ISO 3166-1 alpha-2 code |
+| origin_country | string | yes | Uppercase ISO 3166-1 alpha-2 code from the deliberately limited v0.1 fixture allowlist |
 | destination_country | string | yes | Uppercase ISO 3166-1 alpha-2 code |
 | transport_mode | string | yes | One of `air`, `land`, `sea`, `unknown` |
 
@@ -77,7 +77,7 @@ No dashboard is required.
 
 ## 7. Metrics and interpretation
 
-Report counts and rates with denominators. If the denominator is zero, report the metric as unavailable/null, not zero. Report missingness by field, validation failures by issue code, duplicate classes, and ingestion-lag median/p95 only when a documented method and adequate sample size are available. In v0.1, prefer count/min/max/mean and label them clearly; do not imply statistical representativeness.
+Report counts and rates with denominators. If the denominator is zero, report the metric as unavailable/null, not zero. Report missingness by field with an explicit object-record denominator, validation failures by issue code, duplicate classes, and ingestion-lag count/min/max/mean for rows with parseable, non-negative lag. Do not imply statistical representativeness. The v0.1 country-code allowlist is intentionally small and is not a complete or authoritative ISO registry.
 
 A high pass rate does not prove that records are true, complete in the real world, representative or fit for operational decisions. The pipeline validates conformance to this contract only.
 
