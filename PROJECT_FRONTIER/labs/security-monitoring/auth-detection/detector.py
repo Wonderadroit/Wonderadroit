@@ -103,6 +103,7 @@ def detect(
         raise ValueError("window_seconds must be at least 1")
 
     failures: dict[tuple[str, str], deque[datetime]] = defaultdict(deque)
+    brute_force_alerted: set[tuple[str, str]] = set()
     alerts: list[dict[str, Any]] = []
 
     ordered = sorted(events, key=lambda item: item["_time"])
@@ -118,6 +119,23 @@ def detect(
 
         if event["event_type"] == "authentication_failure":
             recent_failures.append(event_time)
+            if len(recent_failures) < failure_threshold:
+                brute_force_alerted.discard(key)
+            elif key not in brute_force_alerted:
+                alerts.append(
+                    {
+                        "rule": "FRONTIER-AUTH-002",
+                        "event_id": event["event_id"],
+                        "source_ip": event["source_ip"],
+                        "username": event["username"],
+                        "failed_attempts": len(recent_failures),
+                        "window_seconds": window_seconds,
+                        "successful_login": False,
+                        "timestamp": event["timestamp"],
+                        "severity": "MEDIUM",
+                    }
+                )
+                brute_force_alerted.add(key)
             continue
 
         if event["event_type"] == "authentication_success":
@@ -135,8 +153,9 @@ def detect(
                         "severity": "HIGH",
                     }
                 )
-            # A successful authentication closes this correlation sequence.
+            # A successful authentication closes both correlation sequences.
             recent_failures.clear()
+            brute_force_alerted.discard(key)
 
     return alerts
 
