@@ -192,9 +192,9 @@ class ValidatorTests(unittest.TestCase):
                 self.assertIn("INVALID_COUNTRY_CODE", diagnostics[0]["issue_codes"])
 
     def test_source_record_id_length_boundaries(self):
-        for length, expected_count in ((1, 1), (64, 1), (0, 0), (65, 0)):
+        for length, expected_count in ((5, 1), (64, 1), (4, 0), (65, 0)):
             with self.subTest(length=length):
-                accepted, diagnostics, _ = run_rows(record(source_record_id="S" * length))
+                accepted, diagnostics, _ = run_rows(record(source_record_id=("SRC-" + "A" * (length - 4)) if length >= 4 else "S" * length))
                 self.assertEqual(len(accepted), expected_count)
                 if expected_count == 0:
                     self.assertIn("INVALID_SOURCE_RECORD_ID", diagnostics[0]["issue_codes"])
