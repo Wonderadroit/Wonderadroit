@@ -167,5 +167,69 @@ class ValidatorTests(unittest.TestCase):
         self.assertIn("INVALID_COUNTRY_CODE", diagnostics[0]["issue_codes"])
 
 
+    def test_null_empty_and_whitespace_for_every_required_field(self):
+        for field in sorted(record()):
+            for value in (None, "", "   "):
+                with self.subTest(field=field, value=value):
+                    _, diagnostics, _ = run_rows(record(**{field: value}))
+                    self.assertIn("EMPTY_REQUIRED_FIELD", diagnostics[0]["issue_codes"])
+
+    def test_each_controlled_vocabulary_rejects_unknown_string(self):
+        cases = {"event_type": "arrival", "source_system": "REAL-SYSTEM",
+                 "transport_mode": "rail"}
+        expected = {"event_type": "INVALID_EVENT_TYPE",
+                    "source_system": "INVALID_SOURCE_SYSTEM",
+                    "transport_mode": "INVALID_TRANSPORT_MODE"}
+        for field, value in cases.items():
+            with self.subTest(field=field):
+                _, diagnostics, _ = run_rows(record(**{field: value}))
+                self.assertIn(expected[field], diagnostics[0]["issue_codes"])
+
+    def test_lowercase_and_malformed_country_codes_rejected(self):
+        for value in ("ng", "NGA", "N1", "ZZ"):
+            with self.subTest(value=value):
+                _, diagnostics, _ = run_rows(record(origin_country=value))
+                self.assertIn("INVALID_COUNTRY_CODE", diagnostics[0]["issue_codes"])
+
+    def test_source_record_id_length_boundaries(self):
+        for length, expected_count in ((1, 1), (64, 1), (0, 0), (65, 0)):
+            with self.subTest(length=length):
+                accepted, diagnostics, _ = run_rows(record(source_record_id="S" * length))
+                self.assertEqual(len(accepted), expected_count)
+                if expected_count == 0:
+                    self.assertIn("INVALID_SOURCE_RECORD_ID", diagnostics[0]["issue_codes"])
+
+    def test_distinct_valid_rows_preserve_input_order(self):
+        rows = [record(record_id=f"SYN-{i:04d}", source_record_id=f"SRC-{i:04d}") for i in (2, 1, 3)]
+        accepted, diagnostics, _ = run_rows(*rows)
+        self.assertEqual([r["record_id"] for r in accepted], ["SYN-0002", "SYN-0001", "SYN-0003"])
+        self.assertEqual([d["row_number"] for d in diagnostics], [1, 2, 3])
+
+    def test_conflicting_duplicate_is_rejected_under_both_input_orders(self):
+        first = record(transport_mode="air")
+        second = record(transport_mode="land")
+        for rows in ((first, second), (second, first)):
+            with self.subTest(order=rows[0]["transport_mode"]):
+                accepted, diagnostics, summary = run_rows(*rows)
+                self.assertEqual(accepted, [])
+                self.assertTrue(all("RECORD_ID_CONFLICT" in d["issue_codes"] for d in diagnostics))
+                self.assertEqual(summary["record_id_conflict_groups"], 1)
+
+    def test_issue_count_keys_are_sorted(self):
+        _, _, summary = run_rows(record(destination_country="GH"), record(event_at="bad"))
+        keys = list(summary["issue_counts"])
+        self.assertEqual(keys, sorted(keys))
+
+    def test_reference_time_changes_future_validity(self):
+        future = record(event_at="2026-11-18T00:00:00Z", ingested_at="2026-11-18T00:01:00Z")
+        early = datetime(2026, 11, 17, 0, 0, tzinfo=timezone.utc)
+        late = datetime(2026, 11, 19, 0, 0, tzinfo=timezone.utc)
+        _, early_diag, _ = validate_records([json.dumps(future)], early)
+        accepted, late_diag, _ = validate_records([json.dumps(future)], late)
+        self.assertIn("EVENT_TOO_FAR_IN_FUTURE", early_diag[0]["issue_codes"])
+        self.assertNotIn("EVENT_TOO_FAR_IN_FUTURE", late_diag[0]["issue_codes"])
+        self.assertEqual(len(accepted), 1)
+
+
 if __name__ == "__main__":
     unittest.main()
