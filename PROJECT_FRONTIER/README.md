@@ -38,10 +38,10 @@ No operational capability or institutional access is assumed. The first delivera
 
 ## Definition of done for the foundation
 
-- [ ] Record the existing technical evidence from public repositories.
-- [ ] Identify skill gaps by demonstrated evidence, not self-description alone.
-- [ ] Select one narrow, defensible research question.
-- [ ] Create a source register using primary institutional and academic sources.
+- [x] Record the existing technical evidence from public repositories.
+- [x] Identify initial skill gaps by demonstrated evidence, not self-description alone.
+- [x] Propose one narrow, defensible research question; finalise after legal/policy source review.
+- [x] Create an initial source register using primary institutional and standards sources.
 - [ ] Build a small reproducible analysis using public aggregate or synthetic data.
 - [ ] Document limitations, privacy safeguards, and next steps.
 
