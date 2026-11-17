@@ -84,7 +84,8 @@ def validate_records(
             continue
         try:
             obj = json.loads(raw, object_pairs_hook=_unique_object,
-                            parse_constant=_reject_nonfinite_constant)\n        except (json.JSONDecodeError, TypeError, ValueError):
+                            parse_constant=_reject_nonfinite_constant)
+        except (json.JSONDecodeError, TypeError, ValueError):
             diagnostics.append({"row_number": row_number, "record_id": None,
                                 "issue_codes": ["MALFORMED_JSON"], "disposition": "rejected"})
             issue_counts["MALFORMED_JSON"] += 1
