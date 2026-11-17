@@ -40,6 +40,7 @@ These are repository-level indicators of software engineering practice. They do 
 - [x] Initial primary-source register created with official NIS, ECOWAS and NIST materials.
 - [x] Initial research question proposed for Nigeria's 2027–2031 National Border Management Strategy.
 - [x] Digital Identity Laboratory scope, draft data contract and initial threat model created using synthetic-only assumptions.
+- [x] Security Monitoring Lab regression suite executed successfully in GitHub Actions (10 tests; synthetic fixture produced the expected alert).
 
 ## Active
 
@@ -47,8 +48,8 @@ These are repository-level indicators of software engineering practice. They do 
 - [ ] Review Nigerian legal and policy sources relevant to identity data, privacy and border management.
 - [ ] Draft the first research brief with page/section-level citations and limitations.
 - [x] Review and freeze the first implementation profile for the Digital Identity Laboratory (Ed25519, fixed demo issuer, strict synthetic schema).
-- [ ] Obtain a successful CI run and complete independent code/test review.
-- [ ] Execute and review the Security Monitoring Lab regression suite in GitHub Actions.
+- [ ] Obtain a successful CI run and complete independent code/test review for the Digital Identity Laboratory.
+- [x] Execute and review the Security Monitoring Lab regression suite in GitHub Actions.
 
 ## Current prototype decision
 
@@ -60,7 +61,9 @@ A first verifier and unit-test suite have been committed. It uses Ed25519, stric
 
 A separate defensive lab has been added under `labs/security-monitoring/auth-detection/`. It contains a standard-library Python batch detector, synthetic JSONL authentication events, regression tests and a GitHub Actions workflow.
 
-The initial Termux prototype produced one expected alert from seven synthetic events in a manually observed positive test. The repository implementation is a stricter revision: it validates event fields and IP addresses, requires timezone-aware timestamps, skips malformed and duplicate event IDs, sorts out-of-order records, and correlates by both username and source IP. The repository regression suite and its CI run remain **pending**. No production SIEM capability or real-world detection effectiveness is claimed.
+The initial Termux prototype produced one expected alert from seven synthetic events in a manually observed positive test. The repository implementation is a stricter revision: it validates event fields and IP addresses, requires timezone-aware timestamps, skips malformed and duplicate event IDs, sorts out-of-order records, and correlates by both username and source IP.
+
+**Verified CI evidence:** GitHub Actions run `44141356573` completed successfully. Its regression step ran 10 tests and reported `OK`; the synthetic fixture step processed seven valid events and generated the expected single alert. The tested workflow commit was `554e2cb70b4f89944d3e8e93a7531d3c0eccfccf`. Later commits on the branch updated documentation and status only. This validates the listed test cases and fixture, not production readiness or real-world detection effectiveness. No production SIEM capability is claimed.
 
 ## Blockers / constraints
 
@@ -71,7 +74,7 @@ The initial Termux prototype produced one expected alert from seven synthetic ev
 
 ## Next action
 
-Run the Security Monitoring Lab regression suite and inspect the GitHub Actions result. Review any failures before extending the detector. Continue the practical networking/Linux baseline and the primary-source legal review. Do not build a broad dashboard.
+Review the Security Monitoring Lab implementation and test coverage. Next, extend the detector only when a concrete detection requirement and test cases are defined. Continue the practical networking/Linux baseline and the primary-source legal review. Do not build a broad dashboard.
 
 ## Decision rule
 
