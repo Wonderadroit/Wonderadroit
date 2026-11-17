@@ -18,7 +18,7 @@ REQUIRED = {
 ALLOWED = REQUIRED
 ID_RE = re.compile(r"^SYN-[A-Z0-9-]{1,60}$")
 COUNTRY_RE = re.compile(r"^[A-Z]{2}$")
-RFC3339_RE = re.compile(r"^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}(?:\.\d+)?(?:Z|[+-]\d{2}:\d{2})$")
+RFC3339_RE = re.compile(r"^[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}:[0-9]{2}(?:\.[0-9]+)?(?:Z|[+-][0-9]{2}:[0-9]{2})$")
 # Deliberately bounded fixture allowlist; this is not a complete ISO registry.
 COUNTRY_CODES = frozenset({
     "NG", "GH", "BJ", "NE", "CM", "GB", "US", "FR", "DE", "CA",
@@ -40,6 +40,11 @@ def _timestamp(value: object) -> datetime | None:
     if parsed.tzinfo is None or parsed.utcoffset() is None:
         return None
     return parsed.astimezone(timezone.utc)
+
+
+def parse_rfc3339(value: object) -> datetime | None:
+    """Parse an RFC 3339 timestamp with an explicit offset into UTC."""
+    return _timestamp(value)
 
 
 def _issue(issues: list[str], code: str) -> None:
