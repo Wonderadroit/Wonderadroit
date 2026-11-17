@@ -1,4 +1,4 @@
-"""Synthetic-only migration data quality validator (v0.1).
+"""Synthetic-only migration data quality validator (v0.2).
 
 This module validates fictional event records against the Project Frontier
 contract. It is not an operational immigration or identity system.
@@ -17,6 +17,7 @@ REQUIRED = {
 }
 ALLOWED = REQUIRED
 ID_RE = re.compile(r"^SYN-[A-Z0-9-]{1,60}$")
+SOURCE_RECORD_ID_RE = re.compile(r"^SRC-[A-Z0-9-]{1,60}$")
 COUNTRY_RE = re.compile(r"^[A-Z]{2}$")
 RFC3339_RE = re.compile(r"^[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}:[0-9]{2}(?:\.[0-9]+)?(?:Z|[+-][0-9]{2}:[0-9]{2})$")
 # Deliberately bounded fixture allowlist; this is not a complete ISO registry.
@@ -67,6 +68,7 @@ def _reject_nonfinite_constant(value: str) -> None:
 
 
 def _canonical(record: dict) -> str:
+    """Canonicalise key order only; values remain lexically/structurally exact."""
     return json.dumps(record, sort_keys=True, separators=(",", ":"), ensure_ascii=False)
 
 
@@ -133,10 +135,9 @@ def validate_records(
         if obj.get("origin_country") == obj.get("destination_country"):
             _issue(issues, "SAME_ORIGIN_DESTINATION")
 
-        for key in ("source_record_id",):
-            value = obj.get(key)
-            if not isinstance(value, str) or not (1 <= len(value) <= 64):
-                _issue(issues, "INVALID_SOURCE_RECORD_ID")
+        source_record_id = obj.get("source_record_id")
+        if not isinstance(source_record_id, str) or not SOURCE_RECORD_ID_RE.fullmatch(source_record_id):
+            _issue(issues, "INVALID_SOURCE_RECORD_ID")
 
         event_at = _timestamp(obj.get("event_at"))
         ingested_at = _timestamp(obj.get("ingested_at"))
@@ -162,7 +163,8 @@ def validate_records(
             "ingested_at_utc": ingested_at,
         })
 
-    # Duplicate and provenance checks run on syntactically parsed object rows.
+    # Duplicate/provenance checks cover every parseable JSON object row,
+    # including rows with other validation issues. See v0.2 metric definitions.
     by_id: dict[str, list[dict]] = defaultdict(list)
     by_source: dict[tuple[str, str], list[dict]] = defaultdict(list)
     for row in parsed_rows:
@@ -170,7 +172,8 @@ def validate_records(
         if isinstance(row["record_id"], str) and ID_RE.fullmatch(row["record_id"]):
             by_id[row["record_id"]].append(row)
         source, source_id = record.get("source_system"), record.get("source_record_id")
-        if isinstance(source, str) and source in SOURCE_SYSTEMS and isinstance(source_id, str) and source_id.strip():
+        if (isinstance(source, str) and source in SOURCE_SYSTEMS
+                and isinstance(source_id, str) and SOURCE_RECORD_ID_RE.fullmatch(source_id)):
             by_source[(source, source_id)].append(row)
 
     exact_duplicate_rows = 0
