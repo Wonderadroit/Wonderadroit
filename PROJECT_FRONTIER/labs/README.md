@@ -32,11 +32,12 @@ Each lab should record:
 
 ## Current lab tracks
 
-- [Digital Identity Laboratory](digital-identity/README.md) — design stage; synthetic credentials only. No verifier implementation is claimed.
-- Networking fundamentals and packet interpretation — planned isolated baseline lab.
+- [Digital Identity Laboratory](digital-identity/README.md) — synthetic credentials only; local educational verifier.
+- [Security Monitoring — Authentication Detection](security-monitoring/auth-detection/README.md) — synthetic JSONL events, Python detection rule, regression tests and CI.
+- Networking fundamentals and packet interpretation — practical baseline in progress.
 
 ## Lab sequencing
 
-The networking baseline validates core infrastructure concepts. The digital identity lab is being specified in parallel, but implementation remains gated on review of its data contract and threat model.
+The networking baseline validates core infrastructure concepts. The digital identity and security-monitoring labs are being developed as separate, synthetic-only exercises. Neither is an operational border system or a production SIEM.
 
 Do not begin with live-target scanning. First establish the ability to explain IP addressing, DNS, TCP handshakes, HTTP requests, TLS at a conceptual level, and the limits of packet captures.
