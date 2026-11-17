@@ -61,6 +61,9 @@ def validate_records(
     parsed_rows: list[dict] = []
     diagnostics: list[dict] = []
     issue_counts: Counter[str] = Counter()
+    missing_by_field: Counter[str] = Counter()
+    object_record_count = 0
+    ingestion_lags: list[float] = []
     for row_number, raw in enumerate(lines, start=1):
         if not raw.strip():
             continue
@@ -77,6 +80,7 @@ def validate_records(
             issue_counts["NON_OBJECT_RECORD"] += 1
             continue
 
+        object_record_count += 1
         issues: list[str] = []
         missing = REQUIRED - obj.keys()
         extra = obj.keys() - ALLOWED
@@ -86,9 +90,9 @@ def validate_records(
             _issue(issues, "UNEXPECTED_FIELD")
         for key in REQUIRED:
             value = obj.get(key)
-            if value is None or (isinstance(value, str) and not value.strip()):
+            if key not in obj or value is None or (isinstance(value, str) and not value.strip()):
+                missing_by_field[key] += 1
                 _issue(issues, "EMPTY_REQUIRED_FIELD")
-                break
 
         rid = obj.get("record_id")
         if not isinstance(rid, str) or not ID_RE.fullmatch(rid):
@@ -119,8 +123,12 @@ def validate_records(
             _issue(issues, "INVALID_EVENT_TIMESTAMP")
         if ingested_at is None:
             _issue(issues, "INVALID_INGESTION_TIMESTAMP")
-        if event_at is not None and ingested_at is not None and ingested_at < event_at:
-            _issue(issues, "INGESTION_BEFORE_EVENT")
+        if event_at is not None and ingested_at is not None:
+            lag = (ingested_at - event_at).total_seconds()
+            if lag < 0:
+                _issue(issues, "INGESTION_BEFORE_EVENT")
+            else:
+                ingestion_lags.append(lag)
         if event_at is not None and event_at > reference_utc + FUTURE_TOLERANCE:
             _issue(issues, "EVENT_TOO_FAR_IN_FUTURE")
 
@@ -189,6 +197,19 @@ def validate_records(
         "rejected_records": sum(d["disposition"] == "rejected" for d in diagnostics),
         "exact_duplicate_rows": exact_duplicate_rows,
         "record_id_conflict_groups": conflict_groups,
+        "object_records_assessed": object_record_count,
+        "missingness_by_field": {
+            key: {"missing_count": missing_by_field[key],
+                  "denominator": object_record_count,
+                  "rate": (missing_by_field[key] / object_record_count if object_record_count else None)}
+            for key in sorted(REQUIRED)
+        },
+        "ingestion_lag_seconds": {
+            "count": len(ingestion_lags),
+            "min": min(ingestion_lags) if ingestion_lags else None,
+            "max": max(ingestion_lags) if ingestion_lags else None,
+            "mean": (sum(ingestion_lags) / len(ingestion_lags) if ingestion_lags else None),
+        },
         "issue_counts": dict(sorted(issue_counts.items())),
     }
     return accepted, diagnostics, summary
