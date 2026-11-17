@@ -119,3 +119,14 @@ The v0.2 code and tests have been committed. GitHub Actions run 44176377842 comp
 - [ ] Independent review of the code, test semantics and NBMS research brief remains outstanding.
 
 The successful v0.2 run proves only the tested synthetic contract behaviour. It does not prove real-world accuracy, truth, representativeness, operational suitability or production readiness.
+
+
+## Independent-review preparation update — 17 November 2026
+
+- [x] Added `labs/migration-data-quality/REVIEW_REQUEST.md` with two distinct human-review tracks: implementation/data-quality semantics and NBMS policy-source interpretation.
+- [x] The request specifies reviewer independence/conflict disclosure, exact commit/version, evidence-backed findings, test execution, limitations and acceptance criteria.
+- [x] Internal inspection identified a documentation inconsistency for the reviewer to assess: the lab README still describes v0.1 and points to historical v0.1 contract/test-plan files, while the implementation and versioned contract/test plan are v0.2. This is disclosed in the review request; it is not represented as independently resolved.
+- [ ] No independent reviewer has yet been identified or confirmed.
+- [ ] No independent review has been completed. PR #3 remains draft and unmerged.
+
+The review package is preparation for human review, not the review itself. Do not start the compact demonstration dataset/report or dashboard work until both review tracks have been addressed and substantive findings reconciled.
