@@ -1,6 +1,6 @@
 # Migration Data Quality Laboratory — Data Contract v0.1
 
-**Status:** Design baseline; implementation and CI validation not yet complete.  
+**Status:** v0.1 prototype implemented; test and independent-review gates remain open.  
 **Data classification:** Synthetic demonstration data only.
 
 ## 1. Research question
@@ -40,7 +40,7 @@ No other fields are accepted in v0.1. Unknown fields are rejected rather than si
 ## 4. Time and provenance semantics
 
 - Timestamps must parse as RFC 3339/ISO 8601 values with an explicit offset; naive local timestamps are invalid.
-- The pipeline preserves original input values in the row-level diagnostics and derives UTC-normalised values for comparison.
+- The pipeline does not copy raw record payloads into diagnostics. It emits only the input row number, a record ID when it matches the synthetic ID pattern, stable issue codes and disposition; accepted output contains UTC-normalised timestamps.
 - `event_at` is when the fictional event is said to have occurred.
 - `ingested_at` is when the fictional source says it entered that source's dataset.
 - `ingested_at < event_at` is a temporal consistency error.
