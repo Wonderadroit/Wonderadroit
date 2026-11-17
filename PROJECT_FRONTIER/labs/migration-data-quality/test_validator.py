@@ -247,5 +247,34 @@ class ValidatorTests(unittest.TestCase):
         self.assertIn("INVALID_EVENT_TIMESTAMP", diagnostics[0]["issue_codes"])
 
 
+    def test_source_record_id_requires_synthetic_prefix_and_ascii_token(self):
+        invalid_values = (
+            "person@example.invalid", "+2348012345678", " SRC-001",
+            "SRC-001 ", "src-001", "SRC-ＡＢＣ",
+        )
+        for value in invalid_values:
+            with self.subTest(value=value):
+                accepted, diagnostics, _ = run_rows(record(source_record_id=value))
+                self.assertEqual(accepted, [])
+                self.assertIn("INVALID_SOURCE_RECORD_ID", diagnostics[0]["issue_codes"])
+
+    def test_equivalent_timestamp_offsets_with_same_record_id_are_conflicts(self):
+        first = record(event_at="2026-11-16T10:00:00Z")
+        second = record(event_at="2026-11-16T11:00:00+01:00")
+        accepted, diagnostics, summary = run_rows(first, second)
+        self.assertEqual(accepted, [])
+        self.assertTrue(all("RECORD_ID_CONFLICT" in d["issue_codes"] for d in diagnostics))
+        self.assertEqual(summary["record_id_conflict_groups"], 1)
+
+    def test_duplicate_metrics_include_parseable_objects_with_other_errors(self):
+        first = record()
+        second = record(transport_mode="rail")
+        accepted, diagnostics, summary = run_rows(first, second)
+        self.assertEqual(accepted, [])
+        self.assertTrue(all("RECORD_ID_CONFLICT" in d["issue_codes"] for d in diagnostics))
+        self.assertEqual(summary["object_records_assessed"], 2)
+        self.assertEqual(summary["record_id_conflict_groups"], 1)
+        self.assertEqual(summary["issue_counts"]["RECORD_ID_CONFLICT"], 2)
+
 if __name__ == "__main__":
     unittest.main()
