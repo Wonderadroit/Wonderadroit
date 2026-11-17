@@ -125,8 +125,16 @@ The successful v0.2 run proves only the tested synthetic contract behaviour. It 
 
 - [x] Added `labs/migration-data-quality/REVIEW_REQUEST.md` with two distinct human-review tracks: implementation/data-quality semantics and NBMS policy-source interpretation.
 - [x] The request specifies reviewer independence/conflict disclosure, exact commit/version, evidence-backed findings, test execution, limitations and acceptance criteria.
-- [x] Internal inspection identified a documentation inconsistency for the reviewer to assess: the lab README still describes v0.1 and points to historical v0.1 contract/test-plan files, while the implementation and versioned contract/test plan are v0.2. This is disclosed in the review request; it is not represented as independently resolved.
+- [x] Reconciled the lab README to identify v0.2 as current and the unversioned contract/test-plan files as historical v0.1 artefacts. The review request now asks reviewers to verify consistency across the README, v0.2 documents, implementation and tests.
 - [ ] No independent reviewer has yet been identified or confirmed.
 - [ ] No independent review has been completed. PR #3 remains draft and unmerged.
 
 The review package is preparation for human review, not the review itself. Do not start the compact demonstration dataset/report or dashboard work until both review tracks have been addressed and substantive findings reconciled.
+
+
+## Documentation reconciliation update — 17 November 2026
+
+- [x] Updated `labs/migration-data-quality/README.md` to describe v0.2 and link to the versioned v0.2 contract and test plan.
+- [x] Explicitly labelled `DATA_CONTRACT.md` and `TEST_PLAN.md` as retained historical v0.1 documents.
+- [x] Updated `REVIEW_REQUEST.md` so independent reviewers assess consistency across the current README, v0.2 contract/test plan, implementation and tests rather than a discrepancy that has now been corrected.
+- [ ] Independent technical review and independent NBMS policy-source review remain outstanding. Documentation correction does not close either review gate.
