@@ -59,6 +59,14 @@ An experimental project exploring how security checks can be integrated into sof
 
 **Technologies:** GitHub Actions · CI/CD · DevSecOps
 
+## Current Development Initiative
+
+### Project Frontier — Border Security, Technology & Intelligence
+
+An independent professional development and applied-research initiative exploring cybersecurity, digital identity, border technology, migration intelligence, and international cooperation. It is a personal learning portfolio, not an official government or agency project.
+
+[Project charter](PROJECT_FRONTIER/README.md) · [Roadmap](PROJECT_FRONTIER/ROADMAP.md) · [Current status](PROJECT_FRONTIER/STATUS.md)
+
 ## Engineering Principles
 
 - **Understand before changing** — model the system and its constraints first.
