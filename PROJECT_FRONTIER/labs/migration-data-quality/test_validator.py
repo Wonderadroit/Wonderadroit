@@ -231,5 +231,16 @@ class ValidatorTests(unittest.TestCase):
         self.assertEqual(len(accepted), 1)
 
 
+    def test_duplicate_json_object_keys_are_rejected(self):
+        raw = '{"record_id":"SYN-0001","record_id":"SYN-0002"}'
+        _, diagnostics, _ = validate_records([raw], REFERENCE)
+        self.assertEqual(diagnostics[0]["issue_codes"], ["MALFORMED_JSON"])
+
+    def test_nonstandard_json_numeric_constant_is_rejected(self):
+        raw = '{"record_id":"SYN-0001","event_type":NaN}'
+        _, diagnostics, _ = validate_records([raw], REFERENCE)
+        self.assertEqual(diagnostics[0]["issue_codes"], ["MALFORMED_JSON"])
+
+
 if __name__ == "__main__":
     unittest.main()
