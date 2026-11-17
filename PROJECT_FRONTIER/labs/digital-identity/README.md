@@ -69,3 +69,22 @@ These labels describe only the synthetic lab checks. They do not establish a rea
 A first local verifier implementation and unit-test suite now exist. It uses Ed25519 through the maintained `cryptography` library, a fixed demo issuer/key configuration, strict schema checks, UTC validity checks, in-memory duplicate detection, and allow-listed audit events.
 
 This is an initial implementation, not yet a validated release. CI execution, test review, and the documented limitations remain outstanding. No real identity capability is claimed.
+
+## Run the tests
+
+From this directory in Python 3.11 or newer:
+
+```bash
+python -m pip install -e .
+python -m unittest discover -s tests -v
+```
+
+The package depends on the maintained `cryptography` library. Tests generate ephemeral Ed25519 keys in memory; no private key files are needed.
+
+## Implementation limitations
+
+- Duplicate detection is in-memory and resets when the process restarts.
+- The verifier trusts only keys explicitly supplied by the caller; this lab does not implement a certificate authority, key rotation, revocation, or issuer onboarding process.
+- The clock is injected for deterministic tests. Production clock integrity is not addressed.
+- The deterministic JSON encoding is a Python-only lab contract, not a general interoperable credential standard.
+- A valid signature proves that the payload was signed by the holder of the configured demo private key and was not modified. It does not prove who is presenting it or whether the claims describe a real person.
