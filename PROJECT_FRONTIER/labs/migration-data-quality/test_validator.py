@@ -221,7 +221,7 @@ class ValidatorTests(unittest.TestCase):
         self.assertEqual(keys, sorted(keys))
 
     def test_reference_time_changes_future_validity(self):
-        future = record(event_at="2026-11-18T00:00:00Z", ingested_at="2026-11-18T00:01:00Z")
+        future = record(event_at="2026-11-18T00:01:00Z", ingested_at="2026-11-18T00:02:00Z")
         early = datetime(2026, 11, 17, 0, 0, tzinfo=timezone.utc)
         late = datetime(2026, 11, 19, 0, 0, tzinfo=timezone.utc)
         _, early_diag, _ = validate_records([json.dumps(future)], early)
