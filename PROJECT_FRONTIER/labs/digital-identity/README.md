@@ -64,6 +64,8 @@ These labels describe only the synthetic lab checks. They do not establish a rea
 - The README and threat model clearly state that successful verification proves only integrity/issuer/validity checks within this toy system—not that the subject is the person presenting it.
 - All tests pass in a documented environment.
 
-## Current state
+## Implementation status
 
-Specification and threat-model design. No verifier implementation or real identity capability is claimed yet.
+A first local verifier implementation and unit-test suite now exist. It uses Ed25519 through the maintained `cryptography` library, a fixed demo issuer/key configuration, strict schema checks, UTC validity checks, in-memory duplicate detection, and allow-listed audit events.
+
+This is an initial implementation, not yet a validated release. CI execution, test review, and the documented limitations remain outstanding. No real identity capability is claimed.
