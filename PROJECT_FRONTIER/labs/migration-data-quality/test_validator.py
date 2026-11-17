@@ -143,6 +143,20 @@ class ValidatorTests(unittest.TestCase):
         self.assertIsNone(summary["missingness_by_field"]["record_id"]["rate"])
         self.assertIsNone(summary["ingestion_lag_seconds"]["mean"])
 
+    def test_timestamp_must_use_rfc3339_separator_and_offset(self):
+        _, diagnostics, _ = run_rows(record(event_at="2026-11-16 10:00:00+00:00"))
+        self.assertIn("INVALID_EVENT_TIMESTAMP", diagnostics[0]["issue_codes"])
+
+    def test_exact_future_tolerance_boundary_is_accepted(self):
+        accepted, _, _ = run_rows(
+            record(event_at="2026-11-18T12:00:00Z", ingested_at="2026-11-18T12:01:00Z")
+        )
+        self.assertEqual(len(accepted), 1)
+
+    def test_invalid_record_id_is_not_echoed_in_diagnostics(self):
+        _, diagnostics, _ = run_rows(record(record_id="user@example.invalid"))
+        self.assertIsNone(diagnostics[0]["record_id"])
+
 
 if __name__ == "__main__":
     unittest.main()
