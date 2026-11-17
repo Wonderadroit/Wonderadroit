@@ -1,6 +1,6 @@
 # Migration Data Quality Laboratory — Test Plan v0.2
 
-**Status:** v0.2 regression changes committed; GitHub Actions run 44175844227 is in progress at the time of writing. Independent review remains open.
+**Status:** The first v0.2 CI run (44175844227) passed the carried-forward 41-test suite, but it ran before the three new v0.2 regression methods were committed. The latest three-test additions are awaiting their own CI result. Independent review remains open.
 
 ## Test philosophy
 
