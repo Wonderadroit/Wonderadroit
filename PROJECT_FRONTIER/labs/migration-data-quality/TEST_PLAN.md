@@ -25,7 +25,11 @@ Tests establish deterministic contract behaviour before any dashboard or analyti
 - Invalid UTF-8 rejected at the file-reader boundary.
 - Empty-input CLI output, invalid reference-time rejection, aggregate-only console output and reference-time-dependent future validation.
 
-Latest evidence: GitHub Actions run 44174595619, Python 3.12, 41 tests passed; the synthetic CLI fixture completed successfully.
+Latest evidence: GitHub Actions run 44174686867, Python 3.12, 41 tests passed; the synthetic CLI fixture completed successfully.
+
+## Internal review note
+
+An internal code inspection (not an independent review) found that `source_record_id` is currently validated only as a non-empty string of at most 64 characters. The field is retained in accepted output, so arbitrary non-synthetic text could pass. Resolve with a versioned contract change, a restrictive synthetic identifier pattern, and regression tests for email-like, phone-like, whitespace-padded and otherwise nonconforming values. Do not describe this finding as independently reviewed.
 
 ## Independent review still required
 
@@ -35,6 +39,8 @@ The executable v0.1 cases are covered, but the lab is not approved as production
 3. Missingness and ingestion-lag denominators.
 4. Privacy-minimised diagnostics and unexpected-field rejection.
 5. Contract/documentation consistency and output reproducibility.
+6. Policy-source interpretation in the research brief.
+7. Whether the provenance identifier constraints adequately enforce the synthetic-only boundary.
 
 ## Acceptance gate
 
