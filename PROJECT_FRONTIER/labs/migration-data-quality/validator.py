@@ -98,7 +98,7 @@ def validate_records(
             ("source_system", SOURCE_SYSTEMS, "INVALID_SOURCE_SYSTEM"),
             ("transport_mode", TRANSPORT_MODES, "INVALID_TRANSPORT_MODE"),
         ):
-            if obj.get(key) not in allowed:
+            if not isinstance(obj.get(key), str) or obj.get(key) not in allowed:
                 _issue(issues, issue_code)
 
         for key in ("origin_country", "destination_country"):
@@ -141,7 +141,7 @@ def validate_records(
         if isinstance(row["record_id"], str) and ID_RE.fullmatch(row["record_id"]):
             by_id[row["record_id"]].append(row)
         source, source_id = record.get("source_system"), record.get("source_record_id")
-        if source in SOURCE_SYSTEMS and isinstance(source_id, str) and source_id.strip():
+        if isinstance(source, str) and source in SOURCE_SYSTEMS and isinstance(source_id, str) and source_id.strip():
             by_source[(source, source_id)].append(row)
 
     exact_duplicate_rows = 0
