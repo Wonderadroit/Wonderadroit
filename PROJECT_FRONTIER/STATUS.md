@@ -42,7 +42,7 @@ These are repository-level indicators of software engineering practice. They do 
 - [x] Initial NIS strategic-alignment note added, mapping public NIS priorities to safe Frontier portfolio capabilities.
 - [x] Digital Identity Laboratory scope, draft data contract and initial threat model created using synthetic-only assumptions.
 - [x] Migration Data Quality Laboratory v0.1 data contract and executable test plan documented.
-- [x] Migration Data Quality Laboratory v0.1 validator, CLI, synthetic fixtures and regression suite implemented; 40 tests passed in GitHub Actions run 44174372023.
+- [x] Migration Data Quality Laboratory v0.1 validator, CLI, synthetic fixtures and regression suite implemented; 41 tests passed in GitHub Actions run 44174595619.
 - [x] First source-checked research brief drafted for the 2027–2031 National Border Management Strategy, distinguishing official facts, recommendations and unknowns.
 - [x] First synthetic-only validator and command-line runner implemented.
 - [x] Synthetic fixture and deterministic accepted/diagnostics/summary outputs added.
@@ -71,9 +71,9 @@ A first verifier and unit-test suite have been committed. It uses Ed25519, stric
 
 The v0.1 prototype is under PROJECT_FRONTIER/labs/migration-data-quality/. It accepts only a narrow fictional movement-event schema with no personal identity fields. It validates required fields, controlled values, timestamp offsets/order, a bounded country-code fixture allowlist, duplicate record IDs, conflicting record IDs and duplicate source references. It emits accepted JSONL, row-level diagnostics and a summary with issue counts, field missingness denominators/rates and ingestion-lag count/min/max/mean.
 
-The latest CI run on Python 3.12 passed 40 unit tests and executed the synthetic fixture (run 44174372023). An intermediate run caught an over-escaped timestamp-validation regex; the expression was corrected and the final run passed. The fixture produced 3 object records, 1 accepted record and 2 rejected dispositions (one exact duplicate and one same-origin/destination record). This proves only the tested contract behaviour on synthetic inputs. It does not establish real-world migration data quality, truth, representativeness or operational suitability.
+The latest CI run on Python 3.12 passed 41 unit tests and executed the synthetic fixture (run 44174595619). An intermediate run caught an over-escaped timestamp-validation regex; the expression was corrected and the final run passed. The fixture produced 3 object records, 1 accepted record and 2 rejected dispositions (one exact duplicate and one same-origin/destination record). This proves only the tested contract behaviour on synthetic inputs. It does not establish real-world migration data quality, truth, representativeness or operational suitability.
 
-The country-code allowlist is intentionally limited and is not a complete or authoritative ISO registry. The documented v0.1 executable test cases are now covered, including strict rejection of duplicate JSON keys and non-standard numeric constants; independent review remains outstanding.
+The country-code allowlist is intentionally limited and is not a complete or authoritative ISO registry. The documented v0.1 executable test cases are now covered, including strict rejection of duplicate JSON keys and non-standard numeric constants, plus ASCII-only RFC 3339 timestamps and strict CLI reference-time parsing; independent review remains outstanding.
 
 ## Security Monitoring Laboratory
 
