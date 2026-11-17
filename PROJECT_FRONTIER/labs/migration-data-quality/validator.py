@@ -172,7 +172,11 @@ def validate_records(
         if isinstance(row["record_id"], str) and ID_RE.fullmatch(row["record_id"]):
             by_id[row["record_id"]].append(row)
         source, source_id = record.get("source_system"), record.get("source_record_id")
-        if (isinstance(source, str) and source in SOURCE_SYSTEMS
+        # A provenance collision is meaningful only when both linked record IDs
+        # are valid synthetic identifiers; malformed IDs must not create a
+        # duplicate-source alert against an otherwise valid record.
+        if (row["record_id"] is not None
+                and isinstance(source, str) and source in SOURCE_SYSTEMS
                 and isinstance(source_id, str) and SOURCE_RECORD_ID_RE.fullmatch(source_id)):
             by_source[(source, source_id)].append(row)
 
