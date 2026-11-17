@@ -15,7 +15,9 @@ This is an educational batch detector. It is **not** a production SIEM, an authe
 
 ## Detection rule: FRONTIER-AUTH-001
 
-Generate a HIGH-severity alert when at least five failed authentication events are followed by a successful authentication for the **same username and source IP** within a rolling ten-minute window.
+Generate a HIGH-severity alert (FRONTIER-AUTH-001) when at least five failed authentication events are followed by a successful authentication for the **same username and source IP** within a rolling ten-minute window.
+
+Generate a MEDIUM-severity alert (FRONTIER-AUTH-002) when at least five failed authentication events occur for the **same username and source IP** within a rolling ten-minute window, even if no successful login follows. The alert is emitted once per burst; a successful login or expiry of the rolling failure window resets the burst state. If a later successful login follows the failures, FRONTIER-AUTH-001 may also fire as a separate, stronger correlation signal.
 
 The correlation key includes both username and source IP to avoid combining failures against different accounts that happen to originate from one shared address.
 
@@ -62,7 +64,9 @@ Malformed records and duplicate event IDs are skipped and reported. Events are s
 
 The regression suite covers:
 
-- Positive detection.
+- Positive detection for failure-then-success correlation.
+- Brute-force detection at the threshold without requiring a successful login.
+- Brute-force negative case below threshold, per-burst alert suppression, key isolation, window expiry/re-arming, and success reset.
 - Below-threshold negative case.
 - Success outside the time window.
 - Different usernames and source IPs.
@@ -78,6 +82,7 @@ The regression suite covers:
 - Assumes event timestamps are trustworthy and clocks are sufficiently synchronised.
 - No enrichment, asset criticality, allow-listing, user identity resolution, or baseline modelling.
 - Thresholds are fixed defaults and require environment-specific tuning before operational use.
+- The brute-force rule is a simple event-count heuristic; legitimate retries, shared NAT, automated clients and password-manager errors can produce false positives.
 - Does not inspect packet payloads or establish data exfiltration.
 - Does not establish whether an authentication success was authorised or malicious.
 
