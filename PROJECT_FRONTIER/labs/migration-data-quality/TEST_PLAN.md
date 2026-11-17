@@ -6,13 +6,13 @@
 
 Tests establish deterministic contract behaviour before any dashboard or analytical interpretation. Every fixture is fictional. Tests use a fixed reference timestamp and assert dispositions and stable issue codes.
 
-## Implemented coverage (38 passing tests)
+## Implemented coverage (40 passing tests)
 
 - Valid record acceptance and UTC timestamp normalisation.
 - Equivalent timestamp offsets and strict RFC 3339 syntax.
 - Null, empty-string and whitespace-only values for every required field.
 - Missing required fields and unexpected fields.
-- Invalid JSON continuation and non-object JSON.
+- Invalid JSON continuation, duplicate object keys, non-standard numeric constants and non-object JSON.
 - Invalid, overlong and privacy-minimised record identifiers.
 - Each controlled vocabulary independently rejects unsupported values and non-string values do not crash validation.
 - Unknown, lowercase and malformed country-code values; same-origin/destination rejection.
@@ -25,7 +25,7 @@ Tests establish deterministic contract behaviour before any dashboard or analyti
 - Invalid UTF-8 rejected at the file-reader boundary.
 - Empty-input CLI output, invalid reference-time rejection, aggregate-only console output and reference-time-dependent future validation.
 
-Latest evidence: GitHub Actions run 44173904566, Python 3.12, 38 tests passed; synthetic CLI fixture completed successfully.
+Latest evidence: GitHub Actions run 44174372023, Python 3.12, 40 tests passed; synthetic CLI fixture completed successfully.
 
 ## Independent review still required
 
