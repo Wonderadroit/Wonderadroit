@@ -7,6 +7,11 @@ from pathlib import Path
 from validator import validate_records
 
 
+def load_input(path: Path) -> str:
+    """Read UTF-8 input strictly; never repair or silently discard bytes."""
+    return path.read_bytes().decode("utf-8", errors="strict")
+
+
 def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--input", required=True, type=Path, help="Synthetic JSONL input")
@@ -19,7 +24,7 @@ def main() -> int:
         reference_time = datetime.fromisoformat(args.reference_time.replace("Z", "+00:00"))
         if reference_time.tzinfo is None or reference_time.utcoffset() is None:
             raise ValueError("reference time must include an explicit UTC offset")
-        raw_text = args.input.read_bytes().decode("utf-8", errors="strict")
+        raw_text = load_input(args.input)
     except (OSError, UnicodeDecodeError, ValueError) as exc:
         parser.error(str(exc))
 
