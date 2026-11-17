@@ -40,6 +40,7 @@ These are repository-level indicators of software engineering practice. They do 
 - [x] Initial primary-source register created with official NIS, ECOWAS and NIST materials.
 - [x] Initial research question proposed for Nigeria's 2027–2031 National Border Management Strategy.
 - [x] Digital Identity Laboratory scope, draft data contract and initial threat model created using synthetic-only assumptions.
+- [x] Security Monitoring Lab regression suite executed successfully in GitHub Actions (10 tests; synthetic fixture produced the expected alert).
 
 ## Active
 
@@ -47,13 +48,22 @@ These are repository-level indicators of software engineering practice. They do 
 - [ ] Review Nigerian legal and policy sources relevant to identity data, privacy and border management.
 - [ ] Draft the first research brief with page/section-level citations and limitations.
 - [x] Review and freeze the first implementation profile for the Digital Identity Laboratory (Ed25519, fixed demo issuer, strict synthetic schema).
-- [ ] Obtain a successful CI run and complete independent code/test review.
+- [ ] Obtain a successful CI run and complete independent code/test review for the Digital Identity Laboratory.
+- [x] Execute and review the Security Monitoring Lab regression suite in GitHub Actions.
 
 ## Current prototype decision
 
 The Digital Identity Laboratory is being designed as a local educational verifier for fictional credentials only. It will demonstrate strict schema validation, a configured demo issuer, payload-integrity checks, expiry checks, duplicate-presentation handling and privacy-minimised audit events.
 
 A first verifier and unit-test suite have been committed. It uses Ed25519, strict schema checks, UTC validity checks, in-memory duplicate detection and allow-listed audit events. The GitHub Actions workflow has been added, but a successful run has not yet been observed; implementation is therefore not yet validated. No real passport, national-ID, biometric, traveller or government data will be used. A successful lab check will not be represented as proof of a presenter's identity, legal status or eligibility.
+
+### Security Monitoring Laboratory
+
+A separate defensive lab has been added under `labs/security-monitoring/auth-detection/`. It contains a standard-library Python batch detector, synthetic JSONL authentication events, regression tests and a GitHub Actions workflow.
+
+The initial Termux prototype produced one expected alert from seven synthetic events in a manually observed positive test. The repository implementation is a stricter revision: it validates event fields and IP addresses, requires timezone-aware timestamps, skips malformed and duplicate event IDs, sorts out-of-order records, and correlates by both username and source IP. Detection Engine v0.2 adds `FRONTIER-AUTH-002`, a medium-severity brute-force heuristic that alerts on five failures in ten minutes without requiring a subsequent successful login. It suppresses repeat alerts within a burst and resets on success or expiry of the rolling window. Six additional regression tests were added for thresholding, key isolation, suppression, expiry/re-arming and reset behavior. A further input-validation test confirms whitespace-only event identifiers and usernames are rejected.
+
+**Verified CI evidence for v0.1:** GitHub Actions run `44141356573` completed successfully. Its regression step ran 10 tests and reported `OK`; the synthetic fixture step processed seven valid events and generated the expected single alert. The tested workflow commit was `554e2cb70b4f89944d3e8e93a7531d3c0eccfccf`. Later commits on the branch added v0.2 brute-force logic and six regression tests. **Verified CI evidence for v0.2:** GitHub Actions run `44143393201` completed successfully on commit `d239b46f882f78f2bbce63624b12262f9290b741`. The regression suite ran 17 tests and reported `OK`. The synthetic fixture processed seven valid events and generated two alerts: `FRONTIER-AUTH-002` (MEDIUM) and `FRONTIER-AUTH-001` (HIGH). The first run of the new blank-identifier test exposed a test-fixture newline-escaping error; the fixture was corrected and the successful run above verifies the corrected test. This validates the listed synthetic cases, not production readiness or real-world detection effectiveness. This lab does not establish production readiness or real-world detection effectiveness. No production SIEM capability is claimed.
 
 ## Blockers / constraints
 
@@ -64,7 +74,7 @@ A first verifier and unit-test suite have been committed. It uses Ed25519, stric
 
 ## Next action
 
-Complete a short networking/Linux baseline and the primary-source legal review. In parallel, review the lab's draft data contract and threat model. Next, obtain CI execution evidence and review test outcomes. Do not build a broad dashboard.
+Review v0.2 false-positive boundaries and event semantics before considering privileged-account monitoring. In particular, evaluate distributed brute-force attempts across multiple source IPs and shared-NAT effects; do not add cross-IP aggregation until its identity and false-positive assumptions are specified. Continue the practical networking/Linux baseline and primary-source legal review. Do not build a broad dashboard.
 
 ## Decision rule
 

@@ -1,0 +1,7 @@
+{"event_id":"evt-001","timestamp":"2026-11-17T02:10:01Z","source_ip":"192.0.2.25","username":"admin","event_type":"authentication_failure"}
+{"event_id":"evt-002","timestamp":"2026-11-17T02:10:05Z","source_ip":"192.0.2.25","username":"admin","event_type":"authentication_failure"}
+{"event_id":"evt-003","timestamp":"2026-11-17T02:10:09Z","source_ip":"192.0.2.25","username":"admin","event_type":"authentication_failure"}
+{"event_id":"evt-004","timestamp":"2026-11-17T02:10:13Z","source_ip":"192.0.2.25","username":"admin","event_type":"authentication_failure"}
+{"event_id":"evt-005","timestamp":"2026-11-17T02:10:17Z","source_ip":"192.0.2.25","username":"admin","event_type":"authentication_failure"}
+{"event_id":"evt-006","timestamp":"2026-11-17T02:10:22Z","source_ip":"192.0.2.25","username":"admin","event_type":"authentication_success"}
+{"event_id":"evt-007","timestamp":"2026-11-17T03:15:00Z","source_ip":"192.0.2.40","username":"staff","event_type":"authentication_success"}
