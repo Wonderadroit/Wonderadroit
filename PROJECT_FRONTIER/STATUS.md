@@ -46,13 +46,14 @@ These are repository-level indicators of software engineering practice. They do 
 - [ ] Complete practical networking/Linux/Python/data baseline.
 - [ ] Review Nigerian legal and policy sources relevant to identity data, privacy and border management.
 - [ ] Draft the first research brief with page/section-level citations and limitations.
-- [ ] Review and freeze the Digital Identity Laboratory data contract and threat model before implementation.
+- [x] Review and freeze the first implementation profile for the Digital Identity Laboratory (Ed25519, fixed demo issuer, strict synthetic schema).
+- [ ] Obtain a successful CI run and complete independent code/test review.
 
 ## Current prototype decision
 
 The Digital Identity Laboratory is being designed as a local educational verifier for fictional credentials only. It will demonstrate strict schema validation, a configured demo issuer, payload-integrity checks, expiry checks, duplicate-presentation handling and privacy-minimised audit events.
 
-No verifier code has been implemented yet. No real passport, national-ID, biometric, traveller or government data will be used. A successful lab check will not be represented as proof of a presenter's identity, legal status or eligibility.
+A first verifier and unit-test suite have been committed. It uses Ed25519, strict schema checks, UTC validity checks, in-memory duplicate detection and allow-listed audit events. The GitHub Actions workflow has been added, but a successful run has not yet been observed; implementation is therefore not yet validated. No real passport, national-ID, biometric, traveller or government data will be used. A successful lab check will not be represented as proof of a presenter's identity, legal status or eligibility.
 
 ## Blockers / constraints
 
@@ -63,7 +64,7 @@ No verifier code has been implemented yet. No real passport, national-ID, biomet
 
 ## Next action
 
-Complete a short networking/Linux baseline and the primary-source legal review. In parallel, review the lab's draft data contract and threat model. Only after these are stable should implementation begin; do not build a broad dashboard.
+Complete a short networking/Linux baseline and the primary-source legal review. In parallel, review the lab's draft data contract and threat model. Next, obtain CI execution evidence and review test outcomes. Do not build a broad dashboard.
 
 ## Decision rule
 
