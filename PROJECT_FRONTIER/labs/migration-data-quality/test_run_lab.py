@@ -13,7 +13,7 @@ class InputReaderTests(unittest.TestCase):
     def test_invalid_utf8_is_rejected_without_repair(self):
         with tempfile.TemporaryDirectory() as directory:
             path = Path(directory) / "bad.jsonl"
-            path.write_bytes(b'{"record_id":"SYN-1"}\\xff')
+            path.write_bytes(b'{"record_id":"SYN-1"}' + bytes([255]))
             with self.assertRaises(UnicodeDecodeError):
                 load_input(path)
 
@@ -68,7 +68,7 @@ class CliTests(unittest.TestCase):
                 "destination_country": "NG",
                 "transport_mode": "air",
             }
-            source.write_text(json.dumps(record) + "\\n", encoding="utf-8")
+            source.write_text(json.dumps(record) + chr(10), encoding="utf-8")
             _, stdout = self.invoke(source, root / "out")
             self.assertNotIn("SYN-PRIVATE-MARKER", stdout)
             self.assertIn('"input_records": 1', stdout)
