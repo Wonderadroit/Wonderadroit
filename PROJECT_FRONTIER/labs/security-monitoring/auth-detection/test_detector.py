@@ -166,6 +166,29 @@ class AuthenticationDetectorTests(unittest.TestCase):
         ]
         self.assertEqual(len(brute), 1)
 
+
+    def test_whitespace_only_event_id_and_username_are_rejected(self):
+        base = {
+            "event_id": "valid-id",
+            "timestamp": "2026-11-17T02:00:00Z",
+            "source_ip": "192.0.2.10",
+            "username": "admin",
+            "event_type": "authentication_failure",
+        }
+        with tempfile.TemporaryDirectory() as directory:
+            path = Path(directory) / "events.jsonl"
+            invalid_id = dict(base, event_id="   ")
+            invalid_user = dict(base, event_id="other", username="   ")
+            path.write_text(
+                json.dumps(invalid_id) + "\\n"
+                + json.dumps(invalid_user) + "\\n",
+                encoding="utf-8",
+            )
+            events, diagnostics, duplicate_count = load_events(path)
+        self.assertEqual(events, [])
+        self.assertEqual(len(diagnostics), 2)
+        self.assertEqual(duplicate_count, 0)
+
     def test_duplicate_event_ids_are_skipped(self):
         original = {
             "event_id": "same-id",
