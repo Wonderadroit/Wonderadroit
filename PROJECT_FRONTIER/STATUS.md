@@ -48,12 +48,19 @@ These are repository-level indicators of software engineering practice. They do 
 - [ ] Draft the first research brief with page/section-level citations and limitations.
 - [x] Review and freeze the first implementation profile for the Digital Identity Laboratory (Ed25519, fixed demo issuer, strict synthetic schema).
 - [ ] Obtain a successful CI run and complete independent code/test review.
+- [ ] Execute and review the Security Monitoring Lab regression suite in GitHub Actions.
 
 ## Current prototype decision
 
 The Digital Identity Laboratory is being designed as a local educational verifier for fictional credentials only. It will demonstrate strict schema validation, a configured demo issuer, payload-integrity checks, expiry checks, duplicate-presentation handling and privacy-minimised audit events.
 
 A first verifier and unit-test suite have been committed. It uses Ed25519, strict schema checks, UTC validity checks, in-memory duplicate detection and allow-listed audit events. The GitHub Actions workflow has been added, but a successful run has not yet been observed; implementation is therefore not yet validated. No real passport, national-ID, biometric, traveller or government data will be used. A successful lab check will not be represented as proof of a presenter's identity, legal status or eligibility.
+
+### Security Monitoring Laboratory
+
+A separate defensive lab has been added under `labs/security-monitoring/auth-detection/`. It contains a standard-library Python batch detector, synthetic JSONL authentication events, regression tests and a GitHub Actions workflow.
+
+The initial Termux prototype produced one expected alert from seven synthetic events in a manually observed positive test. The repository implementation is a stricter revision: it validates event fields and IP addresses, requires timezone-aware timestamps, skips malformed and duplicate event IDs, sorts out-of-order records, and correlates by both username and source IP. The repository regression suite and its CI run remain **pending**. No production SIEM capability or real-world detection effectiveness is claimed.
 
 ## Blockers / constraints
 
@@ -64,7 +71,7 @@ A first verifier and unit-test suite have been committed. It uses Ed25519, stric
 
 ## Next action
 
-Complete a short networking/Linux baseline and the primary-source legal review. In parallel, review the lab's draft data contract and threat model. Next, obtain CI execution evidence and review test outcomes. Do not build a broad dashboard.
+Run the Security Monitoring Lab regression suite and inspect the GitHub Actions result. Review any failures before extending the detector. Continue the practical networking/Linux baseline and the primary-source legal review. Do not build a broad dashboard.
 
 ## Decision rule
 
