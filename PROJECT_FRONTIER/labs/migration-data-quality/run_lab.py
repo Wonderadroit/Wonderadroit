@@ -1,10 +1,9 @@
 """Command-line runner for the synthetic-only migration data quality lab."""
 import argparse
-from datetime import datetime
 import json
 from pathlib import Path
 
-from validator import validate_records
+from validator import parse_rfc3339, validate_records
 
 
 def load_input(path: Path) -> str:
@@ -21,9 +20,9 @@ def main() -> int:
     args = parser.parse_args()
 
     try:
-        reference_time = datetime.fromisoformat(args.reference_time.replace("Z", "+00:00"))
-        if reference_time.tzinfo is None or reference_time.utcoffset() is None:
-            raise ValueError("reference time must include an explicit UTC offset")
+        reference_time = parse_rfc3339(args.reference_time)
+        if reference_time is None:
+            raise ValueError("reference time must be RFC 3339 with an explicit UTC offset")
         raw_text = load_input(args.input)
     except (OSError, UnicodeDecodeError, ValueError) as exc:
         parser.error(str(exc))
