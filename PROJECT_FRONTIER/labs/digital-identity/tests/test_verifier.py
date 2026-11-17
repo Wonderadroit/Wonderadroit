@@ -127,6 +127,30 @@ class VerifierTests(unittest.TestCase):
         result = verifier.verify(sign(make_payload(), self.private_key))
         self.assertEqual(result.status, "REVIEW_REQUIRED")
 
+    def test_signed_header_cannot_be_substituted(self):
+        verifier = Verifier(
+            {ISSUER: {KID: self.private_key.public_key(),
+                      "alternate-kid": self.private_key.public_key()}},
+            clock=lambda: NOW,
+        )
+        envelope = sign(make_payload(), self.private_key)
+        envelope["protected"]["kid"] = "alternate-kid"
+        result = verifier.verify(envelope)
+        self.assertEqual(result.status, "INTEGRITY_FAILED")
+
+    def test_non_utc_timestamp_rejected(self):
+        payload = make_payload(issued_at="2030-01-01T11:00:00+01:00")
+        result = self.verifier.verify(sign(payload, self.private_key))
+        self.assertEqual(result.status, "INVALID_FORMAT")
+
+    def test_future_credential_requires_review(self):
+        payload = make_payload(
+            issued_at="2030-01-01T13:00:00Z",
+            expires_at="2030-01-02T13:00:00Z",
+        )
+        result = self.verifier.verify(sign(payload, self.private_key))
+        self.assertEqual(result.status, "REVIEW_REQUIRED")
+
 
 if __name__ == "__main__":
     unittest.main()
