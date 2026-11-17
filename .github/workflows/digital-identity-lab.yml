@@ -1,6 +1,12 @@
 name: Digital Identity Lab
 
 on:
+  push:
+    branches:
+      - "project-frontier/foundation"
+    paths:
+      - "PROJECT_FRONTIER/labs/digital-identity/**"
+      - ".github/workflows/digital-identity-lab.yml"
   pull_request:
     paths:
       - "PROJECT_FRONTIER/labs/digital-identity/**"
