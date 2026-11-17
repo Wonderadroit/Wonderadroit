@@ -107,4 +107,4 @@ Versioned files:
 - `labs/migration-data-quality/DATA_CONTRACT_v0.2.md`
 - `labs/migration-data-quality/TEST_PLAN_v0.2.md`
 
-The v0.2 code and tests have been committed. GitHub Actions run 44175844227 was observed in progress; no v0.2 pass claim is made until its final conclusion is checked. Independent review of the lab and the NIS strategy research brief remains outstanding. The earlier v0.1 contract and test-plan files are retained as historical artifacts.
+The v0.2 code and tests have been committed. GitHub Actions run 44175844227 completed successfully, but it ran before the three new v0.2-specific regression methods were added and therefore verified only the carried-forward 41-test suite. The three added regression methods and latest test-plan documentation commit still need a fresh CI result. Independent review of the lab and the NIS strategy research brief remains outstanding. The earlier v0.1 contract and test-plan files are retained as historical artifacts.
