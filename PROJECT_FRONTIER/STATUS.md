@@ -18,41 +18,52 @@ These are repository-level indicators of software engineering practice. They do 
 
 | Domain | Evidence-based starting assessment | Next validation |
 |---|---|---|
-| Python/software engineering | Strong project-level evidence | Review code quality, independent implementation, debugging and test design |
-| Security research methodology | Strong documented evidence in CYDRA projects | Validate with a small, independently reproducible lab |
-| Git/GitHub/CI | Strong practical evidence | Continue branch, review, CI and release discipline |
-| Networking | Not established by repository evidence reviewed | Practical baseline assessment |
-| Linux | Not established by repository evidence reviewed | Terminal and system-administration baseline |
+| Python/software engineering | Strong project-level evidence | Independent implementation and explanation |
+| Software architecture | Strong project-level evidence | Architecture walkthrough and trade-off review |
+| Testing/CI | Strong practical evidence | Design a test plan and diagnose seeded failures |
+| Security research methodology | Strong documented evidence | Reproduce a safe local control experiment |
+| Networking | Not established by repository evidence reviewed | IP/subnet/DNS/TCP/HTTP practical assessment |
+| Linux | Not established by repository evidence reviewed | Shell, permissions, processes, packages and logs |
 | SQL/data analysis | Partial / not yet established | Reproducible public-data analysis |
-| Digital forensics | Not established | Begin with evidence handling and offline sample lab |
-| Digital identity/biometrics | Research interest; competence not yet established | Standards and threat-model review |
-| Migration/border governance | Research interest; source-backed baseline pending | Primary-source reading and first brief |
-| English professional writing | To be assessed through a reviewed briefing | Produce and revise first policy/technical brief |
-| French | Starting level not yet assessed | CEFR-aligned placement baseline |
+| Defensive cybersecurity | Working hypothesis only | Threat model and isolated defensive lab |
+| Digital forensics | Not established | Offline evidence-handling exercise |
+| Digital identity | Research interest; competence not established | Standards review and synthetic identity flow |
+| Migration/border governance | No source-checked portfolio item yet | Primary-source policy brief |
+| Professional English | Not formally assessed | Reviewed 800–1,000 word brief |
+| French | Starting level not assessed | CEFR-aligned placement baseline |
 
 ## Completed
 
-- [x] Project charter drafted.
-- [x] Evidence-first operating rules defined.
-- [x] Workstreams and phase gates established.
+- [x] Project charter and safety boundaries drafted.
+- [x] Evidence-first operating rules and phase gates defined.
 - [x] Initial public-repository inventory reviewed.
+- [x] Initial primary-source register created with official NIS, ECOWAS and NIST materials.
+- [x] Initial research question proposed for Nigeria's 2027–2031 National Border Management Strategy.
+- [x] Digital Identity Laboratory scope, draft data contract and initial threat model created using synthetic-only assumptions.
 
 ## Active
 
-- [x] Create initial primary-source register with official NIS, ECOWAS and NIST materials.
 - [ ] Complete practical networking/Linux/Python/data baseline.
-- [x] Propose the first research question on capabilities for Nigeria's 2027–2031 National Border Management Strategy.
-- [ ] Draft the research brief with page/section-level citations and limitations.
+- [ ] Review Nigerian legal and policy sources relevant to identity data, privacy and border management.
+- [ ] Draft the first research brief with page/section-level citations and limitations.
+- [ ] Review and freeze the Digital Identity Laboratory data contract and threat model before implementation.
+
+## Current prototype decision
+
+The Digital Identity Laboratory is being designed as a local educational verifier for fictional credentials only. It will demonstrate strict schema validation, a configured demo issuer, payload-integrity checks, expiry checks, duplicate-presentation handling and privacy-minimised audit events.
+
+No verifier code has been implemented yet. No real passport, national-ID, biometric, traveller or government data will be used. A successful lab check will not be represented as proof of a presenter's identity, legal status or eligibility.
 
 ## Blockers / constraints
 
-- Android phone is the current primary device.
+- Android phone is the current primary device; prefer browser/cloud-compatible and lightweight Python work.
 - No assumption of access to government systems, data, or internal training channels.
+- No live integrations or testing of government/third-party systems without explicit written authorisation.
 - Any future NIS-related career opportunity must be verified through official channels and actual published requirements.
 
 ## Next action
 
-Complete the practical baseline and deepen the legal/policy source review. Draft the first research brief before selecting any prototype. Avoid starting a broad dashboard before the use case and data are established.
+Complete a short networking/Linux baseline and the primary-source legal review. In parallel, review the lab's draft data contract and threat model. Only after these are stable should implementation begin; do not build a broad dashboard.
 
 ## Decision rule
 
