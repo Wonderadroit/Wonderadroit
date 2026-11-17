@@ -123,6 +123,26 @@ class ValidatorTests(unittest.TestCase):
         with self.assertRaises(ValueError):
             validate_records([json.dumps(record())], datetime(2026, 11, 17))
 
+    def test_non_string_controlled_value_is_rejected_not_crashing(self):
+        _, diagnostics, _ = run_rows(record(event_type=[]))
+        self.assertIn("INVALID_EVENT_TYPE", diagnostics[0]["issue_codes"])
+
+    def test_missingness_and_ingestion_lag_metrics_have_denominators(self):
+        bad = record()
+        del bad["source_record_id"]
+        _, _, summary = run_rows(record(), bad)
+        self.assertEqual(summary["object_records_assessed"], 2)
+        self.assertEqual(summary["missingness_by_field"]["source_record_id"]["missing_count"], 1)
+        self.assertEqual(summary["missingness_by_field"]["source_record_id"]["denominator"], 2)
+        self.assertEqual(summary["ingestion_lag_seconds"]["count"], 2)
+        self.assertEqual(summary["ingestion_lag_seconds"]["mean"], 300.0)
+
+    def test_empty_input_has_unavailable_rates_and_lag_metrics(self):
+        _, _, summary = validate_records([], REFERENCE)
+        self.assertEqual(summary["input_records"], 0)
+        self.assertIsNone(summary["missingness_by_field"]["record_id"]["rate"])
+        self.assertIsNone(summary["ingestion_lag_seconds"]["mean"])
+
 
 if __name__ == "__main__":
     unittest.main()
