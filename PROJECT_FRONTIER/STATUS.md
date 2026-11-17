@@ -44,13 +44,13 @@ These are repository-level indicators of software engineering practice. They do 
 - [x] Migration Data Quality Laboratory v0.1 data contract and executable test plan documented.
 - [x] First synthetic-only validator and command-line runner implemented.
 - [x] Synthetic fixture and deterministic accepted/diagnostics/summary outputs added.
-- [x] GitHub Actions regression suite passed: 23 tests on Python 3.12; synthetic fixture run succeeded (workflow run 44172383077).
+- [x] GitHub Actions regression suite passed: 26 tests on Python 3.12; synthetic fixture run succeeded (workflow run 44172650451).
 
 ## Active
 
 - [ ] Independent review of duplicate/conflict semantics, field typing, time handling, metrics and privacy boundaries.
-- [ ] Add explicit file-reader tests for invalid UTF-8 and remaining identifier/country-code boundary cases.
-- [ ] Expand tests for invalid UTF-8 at the file-reader boundary, identifier bounds, unknown country codes and remaining summary edge cases. The exact future-time boundary, strict RFC 3339 timestamp syntax and invalid-ID diagnostic minimisation now have regression coverage.
+- [x] Add strict invalid-UTF-8 file-reader test and identifier/country-code boundary tests.
+- [ ] Address the deferred cases listed in TEST_PLAN.md: full controlled-vocabulary variants, all-field null/empty cases, ordering/permutation checks, byte-for-byte CLI determinism and CLI error-path coverage. Independent review remains required.
 - [ ] Complete practical networking/Linux/Python/data baseline.
 - [ ] Review Nigerian legal and policy sources relevant to identity data, privacy and border management.
 - [ ] Convert the NIS 2027–2031 alignment note into a source-checked policy brief; the note is a planning baseline, not a completed research brief.
@@ -69,7 +69,7 @@ A first verifier and unit-test suite have been committed. It uses Ed25519, stric
 
 The v0.1 prototype is under PROJECT_FRONTIER/labs/migration-data-quality/. It accepts only a narrow fictional movement-event schema with no personal identity fields. It validates required fields, controlled values, timestamp offsets/order, a bounded country-code fixture allowlist, duplicate record IDs, conflicting record IDs and duplicate source references. It emits accepted JSONL, row-level diagnostics and a summary with issue counts, field missingness denominators/rates and ingestion-lag count/min/max/mean.
 
-The latest CI run on Python 3.12 passed 23 unit tests and executed the synthetic fixture (run 44172383077). An intermediate run caught an over-escaped timestamp-validation regex; the expression was corrected and the final run passed. The fixture produced 3 object records, 1 accepted record and 2 rejected dispositions (one exact duplicate and one same-origin/destination record). This proves only the tested contract behaviour on synthetic inputs. It does not establish real-world migration data quality, truth, representativeness or operational suitability.
+The latest CI run on Python 3.12 passed 26 unit tests and executed the synthetic fixture (run 44172650451). An intermediate run caught an over-escaped timestamp-validation regex; the expression was corrected and the final run passed. The fixture produced 3 object records, 1 accepted record and 2 rejected dispositions (one exact duplicate and one same-origin/destination record). This proves only the tested contract behaviour on synthetic inputs. It does not establish real-world migration data quality, truth, representativeness or operational suitability.
 
 The country-code allowlist is intentionally limited and is not a complete or authoritative ISO registry. The implementation is a first prototype awaiting independent review and broader edge-case tests.
 
