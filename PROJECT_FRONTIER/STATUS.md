@@ -1,7 +1,7 @@
 # Project Frontier — Status
 
 **Last reviewed:** 2026-11-17  
-**Current phase:** Phase 0 — Baseline and research design  
+**Current phase:** Phase 1 — First reproducible synthetic data-quality prototype  
 **Overall state:** IN PROGRESS
 
 ## Verified starting assets
@@ -41,12 +41,15 @@ These are repository-level indicators of software engineering practice. They do 
 - [x] Initial research question proposed for Nigeria's 2027–2031 National Border Management Strategy.
 - [x] Initial NIS strategic-alignment note added, mapping public NIS priorities to safe Frontier portfolio capabilities.
 - [x] Digital Identity Laboratory scope, draft data contract and initial threat model created using synthetic-only assumptions.
-- [x] Migration Data Quality Laboratory v0.1 design baseline: synthetic-only data contract and test plan documented.
+- [x] Migration Data Quality Laboratory v0.1 data contract and executable test plan documented.
+- [x] First synthetic-only validator and command-line runner implemented.
+- [x] Synthetic fixture and deterministic accepted/diagnostics/summary outputs added.
+- [x] GitHub Actions regression suite passed: 20 tests on Python 3.12; synthetic fixture run succeeded (workflow run 44172048780).
 
 ## Active
 
-- [ ] Implement the Migration Data Quality Laboratory against the frozen v0.1 contract and test plan.
-- [ ] Add synthetic fixtures and executable tests; obtain a successful CI run and independent review.
+- [ ] Independent review of duplicate/conflict semantics, field typing, time handling, metrics and privacy boundaries.
+- [ ] Expand tests for invalid UTF-8, identifier bounds, unknown country codes, exact future-time boundary and summary edge cases.
 - [ ] Complete practical networking/Linux/Python/data baseline.
 - [ ] Review Nigerian legal and policy sources relevant to identity data, privacy and border management.
 - [ ] Convert the NIS 2027–2031 alignment note into a source-checked policy brief; the note is a planning baseline, not a completed research brief.
@@ -63,9 +66,11 @@ A first verifier and unit-test suite have been committed. It uses Ed25519, stric
 
 ### Migration Data Quality Laboratory
 
-The v0.1 design is documented under PROJECT_FRONTIER/labs/migration-data-quality/. It defines a narrow synthetic movement-event record with no personal identity fields, explicit timestamp/provenance semantics, duplicate/conflict handling, stable issue codes and deterministic outputs. The test plan specifies positive, negative, duplicate, provenance, metric and determinism cases.
+The v0.1 prototype is under PROJECT_FRONTIER/labs/migration-data-quality/. It accepts only a narrow fictional movement-event schema with no personal identity fields. It validates required fields, controlled values, timestamp offsets/order, a bounded country-code fixture allowlist, duplicate record IDs, conflicting record IDs and duplicate source references. It emits accepted JSONL, row-level diagnostics and a summary with issue counts, field missingness denominators/rates and ingestion-lag count/min/max/mean.
 
-**No implementation or CI validation is claimed yet.** The next engineering step is to implement the contract and make the acceptance tests executable before considering analytical reports or dashboards.
+The first CI run on Python 3.12 passed 20 unit tests and executed the synthetic fixture. The fixture produced 3 object records, 1 accepted record and 2 rejected dispositions (one exact duplicate and one same-origin/destination record). This proves only the tested contract behaviour on synthetic inputs. It does not establish real-world migration data quality, truth, representativeness or operational suitability.
+
+The country-code allowlist is intentionally limited and is not a complete or authoritative ISO registry. The implementation is a first prototype awaiting independent review and broader edge-case tests.
 
 ## Security Monitoring Laboratory
 
@@ -80,7 +85,7 @@ The authentication detector is a separate defensive workstream under labs/securi
 
 ## Next action
 
-Implement the Migration Data Quality Laboratory v0.1 exactly against the contract and test plan. Use only fictional fixtures, fixed reference times and deterministic outputs. Keep the work small, testable and reproducible; do not build a broad dashboard.
+Complete the independent review and edge-case tests for the Migration Data Quality Laboratory. Only after that gate, consider a small reproducible analysis note. Do not build a broad dashboard.
 
 ## Decision rule
 
