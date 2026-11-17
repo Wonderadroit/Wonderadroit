@@ -50,8 +50,11 @@ def parse_event(raw: dict[str, Any], line_number: int) -> dict[str, Any]:
         raise ValueError("timestamp must include a timezone")
 
     event = dict(raw)
+    event["event_id"] = raw["event_id"].strip()
     event["source_ip"] = source_ip
     event["username"] = raw["username"].strip()
+    if not event["event_id"] or not event["username"]:
+        raise ValueError("event_id and username must contain non-whitespace characters")
     event["_time"] = timestamp.astimezone(timezone.utc)
     event["_line"] = line_number
     return event
