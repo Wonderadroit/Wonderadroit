@@ -77,7 +77,14 @@ class CliTests(unittest.TestCase):
         with tempfile.TemporaryDirectory() as directory:
             root = Path(directory)
             source = root / "input.jsonl"
-            source.write_text("", encoding="utf-8")
+            source.write_text(json.dumps({
+                "record_id": "SYN-0001", "event_type": "entry",
+                "event_at": "2026-11-16T10:00:00Z",
+                "ingested_at": "2026-11-16T10:05:00Z",
+                "source_system": "SYNTH-A", "source_record_id": "SRC-001",
+                "origin_country": "GH", "destination_country": "NG",
+                "transport_mode": "air"
+            }) + chr(10), encoding="utf-8")
             first, second = root / "first", root / "second"
             self.invoke(source, first)
             self.invoke(source, second)
