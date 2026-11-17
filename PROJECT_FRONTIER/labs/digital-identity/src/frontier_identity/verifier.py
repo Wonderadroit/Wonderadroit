@@ -90,8 +90,8 @@ class Verifier:
             return "INVALID_FORMAT", "key_id_invalid"
         if type(payload) is not dict or set(payload) != PAYLOAD_FIELDS:
             return "INVALID_FORMAT", "payload_shape_invalid"
-        if type(signature_text) is not str:
-            return "INVALID_FORMAT", "signature_type_invalid"
+        if type(signature_text) is not str or len(signature_text) != 88:
+            return "INVALID_FORMAT", "signature_encoding_invalid"
 
         if any(type(value) is not str for value in payload.values()):
             return "INVALID_FORMAT", "payload_value_type_invalid"
