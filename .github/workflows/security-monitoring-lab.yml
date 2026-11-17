@@ -1,0 +1,35 @@
+name: Security Monitoring Lab
+
+on:
+  push:
+    branches:
+      - "project-frontier/security-monitoring-lab"
+    paths:
+      - "PROJECT_FRONTIER/labs/security-monitoring/**"
+      - ".github/workflows/security-monitoring-lab.yml"
+  pull_request:
+    paths:
+      - "PROJECT_FRONTIER/labs/security-monitoring/**"
+      - ".github/workflows/security-monitoring-lab.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  authentication-detector-tests:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: PROJECT_FRONTIER/labs/security-monitoring/auth-detection
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Run regression tests
+        run: python -m unittest -v
+      - name: Run synthetic fixture
+        run: python detector.py
