@@ -61,9 +61,9 @@ A first verifier and unit-test suite have been committed. It uses Ed25519, stric
 
 A separate defensive lab has been added under `labs/security-monitoring/auth-detection/`. It contains a standard-library Python batch detector, synthetic JSONL authentication events, regression tests and a GitHub Actions workflow.
 
-The initial Termux prototype produced one expected alert from seven synthetic events in a manually observed positive test. The repository implementation is a stricter revision: it validates event fields and IP addresses, requires timezone-aware timestamps, skips malformed and duplicate event IDs, sorts out-of-order records, and correlates by both username and source IP.
+The initial Termux prototype produced one expected alert from seven synthetic events in a manually observed positive test. The repository implementation is a stricter revision: it validates event fields and IP addresses, requires timezone-aware timestamps, skips malformed and duplicate event IDs, sorts out-of-order records, and correlates by both username and source IP. Detection Engine v0.2 adds `FRONTIER-AUTH-002`, a medium-severity brute-force heuristic that alerts on five failures in ten minutes without requiring a subsequent successful login. It suppresses repeat alerts within a burst and resets on success or expiry of the rolling window. Six additional regression tests were added for thresholding, key isolation, suppression, expiry/re-arming and reset behavior.
 
-**Verified CI evidence:** GitHub Actions run `44141356573` completed successfully. Its regression step ran 10 tests and reported `OK`; the synthetic fixture step processed seven valid events and generated the expected single alert. The tested workflow commit was `554e2cb70b4f89944d3e8e93a7531d3c0eccfccf`. Later commits on the branch updated documentation and status only. This validates the listed test cases and fixture, not production readiness or real-world detection effectiveness. No production SIEM capability is claimed.
+**Verified CI evidence for v0.1:** GitHub Actions run `44141356573` completed successfully. Its regression step ran 10 tests and reported `OK`; the synthetic fixture step processed seven valid events and generated the expected single alert. The tested workflow commit was `554e2cb70b4f89944d3e8e93a7531d3c0eccfccf`. Later commits on the branch added v0.2 brute-force logic and six regression tests. **v0.2 is not yet CI-verified**; do not treat the earlier 10-test run as evidence for the new rule. This lab does not establish production readiness or real-world detection effectiveness. No production SIEM capability is claimed.
 
 ## Blockers / constraints
 
@@ -74,7 +74,7 @@ The initial Termux prototype produced one expected alert from seven synthetic ev
 
 ## Next action
 
-Review the Security Monitoring Lab implementation and test coverage. Next, extend the detector only when a concrete detection requirement and test cases are defined. Continue the practical networking/Linux baseline and the primary-source legal review. Do not build a broad dashboard.
+Run the expanded 16-test Security Monitoring Lab suite in GitHub Actions and inspect the full job output. Resolve any failures before claiming v0.2 validated. Then review false-positive boundaries and event semantics before considering privileged-account monitoring. Continue the practical networking/Linux baseline and primary-source legal review. Do not build a broad dashboard.
 
 ## Decision rule
 
