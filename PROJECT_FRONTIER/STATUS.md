@@ -28,7 +28,7 @@ These are repository-level indicators of software engineering practice. They do 
 | Defensive cybersecurity | Working hypothesis only | Threat model and isolated defensive lab |
 | Digital forensics | Not established | Offline evidence-handling exercise |
 | Digital identity | Research interest; competence not established | Standards review and synthetic identity flow |
-| Migration/border governance | No source-checked portfolio item yet | Primary-source policy brief |
+| Migration/border governance | Initial NIS strategic-alignment note grounded in official public sources | Page/section-level policy brief and independent source review |
 | Professional English | Not formally assessed | Reviewed 800–1,000 word brief |
 | French | Starting level not assessed | CEFR-aligned placement baseline |
 
@@ -38,13 +38,13 @@ These are repository-level indicators of software engineering practice. They do 
 - [x] Evidence-first operating rules and phase gates defined.
 - [x] Initial public-repository inventory reviewed.
 - [x] Initial primary-source register created with official NIS, ECOWAS and NIST materials.
-- [x] Initial research question proposed for Nigeria's 2027–2031 National Border Management Strategy.
+- [x] Initial research question proposed for Nigeria's 2027–2031 National Border Management Strategy.\n- [x] Initial NIS strategic-alignment note added, mapping public NIS priorities to safe Frontier portfolio capabilities.
 - [x] Digital Identity Laboratory scope, draft data contract and initial threat model created using synthetic-only assumptions.
 
 ## Active
 
 - [ ] Complete practical networking/Linux/Python/data baseline.
-- [ ] Review Nigerian legal and policy sources relevant to identity data, privacy and border management.
+- [ ] Review Nigerian legal and policy sources relevant to identity data, privacy and border management.\n- [ ] Convert the NIS 2027–2031 alignment note into a source-checked policy brief; the new note is a planning baseline, not a completed research brief.
 - [ ] Draft the first research brief with page/section-level citations and limitations.
 - [x] Review and freeze the first implementation profile for the Digital Identity Laboratory (Ed25519, fixed demo issuer, strict synthetic schema).
 - [ ] Obtain a successful CI run and complete independent code/test review.
@@ -64,7 +64,7 @@ A first verifier and unit-test suite have been committed. It uses Ed25519, stric
 
 ## Next action
 
-Complete a short networking/Linux baseline and the primary-source legal review. In parallel, review the lab's draft data contract and threat model. Next, obtain CI execution evidence and review test outcomes. Do not build a broad dashboard.
+Use the NIS 2027–2031 alignment note to guide the next deliverables: first, a source-checked policy brief; second, a synthetic migration-data quality lab with a documented data contract and measurable tests. Continue the authentication detector and digital identity verifier as supporting technical workstreams. Complete the networking/Linux baseline and primary-source legal review. Do not build a broad dashboard.
 
 ## Decision rule
 
