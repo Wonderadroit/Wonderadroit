@@ -39,10 +39,10 @@ These are repository-level indicators of software engineering practice. They do 
 
 ## Active
 
-- [ ] Create primary-source register.
+- [x] Create initial primary-source register with official NIS, ECOWAS and NIST materials.
 - [ ] Complete practical networking/Linux/Python/data baseline.
-- [ ] Select the first narrow research question.
-- [ ] Draft research brief outline.
+- [x] Propose the first research question on capabilities for Nigeria's 2027–2031 National Border Management Strategy.
+- [ ] Draft the research brief with page/section-level citations and limitations.
 
 ## Blockers / constraints
 
@@ -52,7 +52,7 @@ These are repository-level indicators of software engineering practice. They do 
 
 ## Next action
 
-Complete the practical baseline and build the primary-source register before selecting the first prototype. Avoid starting a broad dashboard before the use case and data are established.
+Complete the practical baseline and deepen the legal/policy source review. Draft the first research brief before selecting any prototype. Avoid starting a broad dashboard before the use case and data are established.
 
 ## Decision rule
 
