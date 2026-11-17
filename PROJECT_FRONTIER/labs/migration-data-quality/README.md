@@ -11,7 +11,7 @@ This is a data-quality teaching lab, not an immigration product, operational bor
 From this directory, using Python 3.11 or newer:
 
 ```sh
-python -m unittest -v
+python -m unittest discover -v
 python run_lab.py --input fixtures/synthetic_events.jsonl --output-dir build --reference-time 2026-11-17T12:00:00Z
 ```
 
