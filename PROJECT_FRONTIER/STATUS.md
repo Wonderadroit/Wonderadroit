@@ -52,7 +52,7 @@ These are repository-level indicators of software engineering practice. They do 
 
 - [ ] Independent review of duplicate/conflict semantics, field typing, time handling, metrics and privacy boundaries.
 - [x] Add strict invalid-UTF-8 file-reader test and identifier/country-code boundary tests.
-- [ ] Reconcile the internal review findings documented in `SELF_REVIEW.md`; in particular, tighten the synthetic provenance identifier contract in a versioned change.
+- [x] Address the internal v0.1 provenance and duplicate-semantics findings through a versioned v0.2 change and regression tests; independent review remains open.
 - [ ] Complete practical networking/Linux/Python/data baseline.
 - [ ] Review Nigerian legal and policy sources relevant to identity data, privacy and border management.
 - [ ] Obtain independent review of the Migration Data Quality Laboratory and research brief; reconcile any substantive review findings.
@@ -71,11 +71,11 @@ A first verifier and unit-test suite have been committed. It uses Ed25519, stric
 
 The v0.1 prototype is under PROJECT_FRONTIER/labs/migration-data-quality/. It accepts a narrow fictional movement-event schema with no personal identity fields. It validates required fields, controlled values, timestamp offsets/order, a bounded country-code fixture allowlist, duplicate record IDs, conflicting record IDs and duplicate source references. It emits accepted JSONL, row-level diagnostics and a summary with issue counts, field missingness denominators/rates and ingestion-lag count/min/max/mean.
 
-The latest CI run on Python 3.12 passed 41 unit tests and executed the synthetic fixture (run 44174686867). The fixture produced 3 input object records, 1 accepted record and 2 rejected dispositions (one exact duplicate and one same-origin/destination record). This proves only the tested contract behaviour on synthetic inputs. It does not establish real-world migration data quality, truth, representativeness or operational suitability.
+The v0.1 CI run on Python 3.12 passed 41 unit tests and executed the synthetic fixture (run 44174686867). The v0.2 implementation subsequently passed 45 tests and the synthetic CLI fixture in run 44176377842 (commit `c13c1f85fe677227e194f9ee18968d37ca3de653`). The fixture produced 3 input object records, 1 accepted record and 2 rejected dispositions (one exact duplicate and one same-origin/destination record). This proves only the tested contract behaviour on synthetic inputs. It does not establish real-world migration data quality, truth, representativeness or operational suitability.
 
 The country-code allowlist is intentionally limited and is not a complete or authoritative ISO registry. The documented v0.1 executable test cases include strict rejection of duplicate JSON keys and non-standard numeric constants, ASCII-only RFC 3339 timestamps and strict CLI reference-time parsing; independent review remains outstanding.
 
-An internal self-review identified a gap in the synthetic provenance boundary: `source_record_id` currently accepts any non-empty string up to 64 characters. Because accepted records retain this field, arbitrary text could pass validation despite the synthetic-only rule. A versioned contract change and regression tests are required. This is an internal finding, not an independent review.
+An internal self-review identified a gap in v0.1 provenance validation. v0.2 now constrains `source_record_id` to a synthetic token pattern, adds negative regression cases, and limits duplicate provenance grouping to valid synthetic record IDs. The token pattern is a format constraint, not proof of synthetic origin. This is an internal finding and remediation, not an independent review.
 
 ## Security Monitoring Laboratory
 
@@ -90,7 +90,7 @@ The authentication detector is a separate defensive workstream under labs/securi
 
 ## Next action
 
-Obtain an independent review of the Migration Data Quality Laboratory and research brief. In parallel, retain the internal finding that the provenance identifier currently lacks a synthetic-only format constraint; resolve it through a versioned contract change after the review gate is appropriately recorded. Then produce a compact synthetic demonstration dataset and reproducible quality report. Do not build a broad dashboard.
+Obtain an independent review of the v0.2 Migration Data Quality Laboratory and the NBMS research brief. Resolve substantive findings, then produce a compact synthetic demonstration dataset and reproducible quality report. Do not build a broad dashboard.
 
 ## Decision rule
 
@@ -108,3 +108,14 @@ Versioned files:
 - `labs/migration-data-quality/TEST_PLAN_v0.2.md`
 
 The v0.2 code and tests have been committed. GitHub Actions run 44175844227 completed successfully, but it ran before the three new v0.2-specific regression methods were added and therefore verified only the carried-forward 41-test suite. The three added regression methods and latest test-plan documentation commit still need a fresh CI result. Independent review of the lab and the NIS strategy research brief remains outstanding. The earlier v0.1 contract and test-plan files are retained as historical artifacts.
+
+
+## v0.2 verification update — 17 November 2026
+
+- [x] Tighten the source-local identifier format and add negative tests for email-like, phone-like, whitespace-padded, lowercase and non-ASCII values.
+- [x] Define lexical duplicate semantics, including equivalent timestamp offsets, and document duplicate/metric denominators.
+- [x] Correct provenance collision grouping so invalid record IDs do not create duplicate-source-reference findings.
+- [x] GitHub Actions run **44176377842** passed **45 tests** on Python 3.12 and completed the synthetic CLI fixture. Run URL: https://github.com/Wonderadroit/Wonderadroit/actions/runs/44176377842
+- [ ] Independent review of the code, test semantics and NBMS research brief remains outstanding.
+
+The successful v0.2 run proves only the tested synthetic contract behaviour. It does not prove real-world accuracy, truth, representativeness, operational suitability or production readiness.
