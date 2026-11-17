@@ -99,7 +99,7 @@ A phase is not complete because code was written or a workflow turned green. It 
 
 ## v0.2 continuation update — 17 November 2026
 
-The internal provenance finding has been addressed in code: `source_record_id` now requires the synthetic-only pattern `SRC-[A-Z0-9-]{1,60}`. Regression cases reject email-like, phone-like, whitespace-padded, lowercase and non-ASCII lookalike values and test identifier boundaries.
+The internal provenance finding has been addressed in code: `source_record_id` now requires the narrow token format `SRC-[A-Z0-9-]{1,60}`. This is a format constraint, not proof of synthetic origin; repository fixtures must remain generated fictional data. Regression cases reject email-like, phone-like, whitespace-padded, lowercase and non-ASCII lookalike values and test identifier boundaries.
 
 The duplicate policy is now explicit: exact duplicate comparison canonicalises JSON object-key order only; timestamp strings are not semantically normalised before comparison. Equivalent instants written with different offsets therefore count as conflicting payloads under the same record ID. Duplicate/conflict grouping covers all parseable JSON objects, including rows with other validation defects; metric denominators are documented in `DATA_CONTRACT_v0.2.md`.
 
@@ -107,7 +107,7 @@ Versioned files:
 - `labs/migration-data-quality/DATA_CONTRACT_v0.2.md`
 - `labs/migration-data-quality/TEST_PLAN_v0.2.md`
 
-The v0.2 code and tests have been committed. GitHub Actions run 44175844227 completed successfully, but it ran before the three new v0.2-specific regression methods were added and therefore verified only the carried-forward 41-test suite. The three added regression methods and latest test-plan documentation commit still need a fresh CI result. Independent review of the lab and the NIS strategy research brief remains outstanding. The earlier v0.1 contract and test-plan files are retained as historical artifacts.
+The v0.2 code and tests have been committed. GitHub Actions run 44176377842 completed successfully on Python 3.12 with 45 regression tests passed and the synthetic CLI fixture completed. Subsequent commits update documentation only. Independent review of the lab and the NIS strategy research brief remains outstanding. The earlier v0.1 contract and test-plan files are retained as historical artifacts.
 
 
 ## v0.2 verification update — 17 November 2026
