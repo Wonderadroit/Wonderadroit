@@ -42,6 +42,8 @@ These are repository-level indicators of software engineering practice. They do 
 - [x] Initial NIS strategic-alignment note added, mapping public NIS priorities to safe Frontier portfolio capabilities.
 - [x] Digital Identity Laboratory scope, draft data contract and initial threat model created using synthetic-only assumptions.
 - [x] Migration Data Quality Laboratory v0.1 data contract and executable test plan documented.
+- [x] Migration Data Quality Laboratory v0.1 validator, CLI, synthetic fixtures and regression suite implemented; 38 tests passed in GitHub Actions run 44173904566.
+- [x] First source-checked research brief drafted for the 2027–2031 National Border Management Strategy, distinguishing official facts, recommendations and unknowns.
 - [x] First synthetic-only validator and command-line runner implemented.
 - [x] Synthetic fixture and deterministic accepted/diagnostics/summary outputs added.
 - [x] GitHub Actions regression suite passed: 38 tests on Python 3.12; synthetic fixture run succeeded (workflow run 44173904566).
@@ -53,7 +55,7 @@ These are repository-level indicators of software engineering practice. They do 
 - [ ] Address the deferred cases listed in TEST_PLAN.md: full controlled-vocabulary variants, all-field null/empty cases, ordering/permutation checks, byte-for-byte CLI determinism and CLI error-path coverage. Independent review remains required.
 - [ ] Complete practical networking/Linux/Python/data baseline.
 - [ ] Review Nigerian legal and policy sources relevant to identity data, privacy and border management.
-- [ ] Convert the NIS 2027–2031 alignment note into a source-checked policy brief; the note is a planning baseline, not a completed research brief.
+- [ ] Obtain independent review of the Migration Data Quality Laboratory and research brief; reconcile any substantive review findings.
 - [ ] Obtain a successful CI run and complete independent code/test review for the Digital Identity Laboratory.
 - [ ] Review Security Monitoring Lab false-positive boundaries before extending detection logic.
 
@@ -86,7 +88,7 @@ The authentication detector is a separate defensive workstream under labs/securi
 
 ## Next action
 
-Complete an independent review of the Migration Data Quality Laboratory, then proceed with a source-checked research brief on the 2027–2031 National Border Management Strategy. Do not build a broad dashboard.
+Obtain independent review of the Migration Data Quality Laboratory and research brief. Next, produce a compact synthetic demonstration dataset and a reproducible quality report only after review findings are addressed. Do not build a broad dashboard.
 
 ## Decision rule
 
