@@ -47,6 +47,20 @@ def _issue(issues: list[str], code: str) -> None:
         issues.append(code)
 
 
+def _unique_object(pairs: list[tuple[str, object]]) -> dict:
+    """Reject duplicate JSON object keys instead of silently keeping the last value."""
+    result = {}
+    for key, value in pairs:
+        if key in result:
+            raise ValueError("duplicate JSON object key")
+        result[key] = value
+    return result
+
+
+def _reject_nonfinite_constant(value: str) -> None:
+    raise ValueError(f"non-standard JSON numeric constant: {value}")
+
+
 def _canonical(record: dict) -> str:
     return json.dumps(record, sort_keys=True, separators=(",", ":"), ensure_ascii=False)
 
@@ -69,8 +83,7 @@ def validate_records(
         if not raw.strip():
             continue
         try:
-            obj = json.loads(raw)
-        except (json.JSONDecodeError, TypeError):
+            obj = json.loads(raw, object_pairs_hook=_unique_object,\n                            parse_constant=_reject_nonfinite_constant)\n        except (json.JSONDecodeError, TypeError, ValueError):
             diagnostics.append({"row_number": row_number, "record_id": None,
                                 "issue_codes": ["MALFORMED_JSON"], "disposition": "rejected"})
             issue_counts["MALFORMED_JSON"] += 1
