@@ -28,12 +28,14 @@ def make_payload(**changes):
 
 
 def sign(payload, private_key):
+    protected = {"alg": "Ed25519", "kid": KID}
     encoded = json.dumps(
-        payload, sort_keys=True, separators=(",", ":"), ensure_ascii=False,
+        {"protected": protected, "payload": payload},
+        sort_keys=True, separators=(",", ":"), ensure_ascii=False,
         allow_nan=False
     ).encode("utf-8")
     return {
-        "protected": {"alg": "Ed25519", "kid": KID},
+        "protected": protected,
         "payload": payload,
         "signature": base64.b64encode(private_key.sign(encoded)).decode("ascii"),
     }
