@@ -115,8 +115,8 @@ class Verifier:
             return "INVALID_FORMAT", "validity_interval_invalid"
 
         try:
-            payload_bytes = json.dumps(
-                payload,
+            signed_bytes = json.dumps(
+                {"protected": protected, "payload": payload},
                 sort_keys=True,
                 separators=(",", ":"),
                 ensure_ascii=False,
@@ -124,7 +124,7 @@ class Verifier:
             ).encode("utf-8")
         except (TypeError, ValueError, UnicodeEncodeError):
             return "INVALID_FORMAT", "payload_serialization_invalid"
-        if len(payload_bytes) > MAX_PAYLOAD_BYTES:
+        if len(signed_bytes) > MAX_PAYLOAD_BYTES:
             return "INVALID_FORMAT", "payload_too_large"
 
         issuer_keys = self._trusted_issuers.get(payload["issuer_id"])
@@ -136,7 +136,7 @@ class Verifier:
 
         try:
             signature = base64.b64decode(signature_text, validate=True)
-            public_key.verify(signature, payload_bytes)
+            public_key.verify(signature, signed_bytes)
         except (binascii.Error, ValueError, InvalidSignature):
             return "INTEGRITY_FAILED", "signature_verification_failed"
 
