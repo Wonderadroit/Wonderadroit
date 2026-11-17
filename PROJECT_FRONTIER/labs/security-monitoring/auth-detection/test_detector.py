@@ -42,29 +42,36 @@ class AuthenticationDetectorTests(unittest.TestCase):
 
     def test_five_failures_then_success_within_window_alerts(self):
         alerts = detect(self.scenario(5, 240))
-        self.assertEqual(len(alerts), 1)
-        self.assertEqual(alerts[0]["failed_attempts"], 5)
-        self.assertEqual(alerts[0]["rule"], "FRONTIER-AUTH-001")
+        confirmed = [a for a in alerts if a["rule"] == "FRONTIER-AUTH-001"]
+        self.assertEqual(len(confirmed), 1)
+        self.assertEqual(confirmed[0]["failed_attempts"], 5)
 
     def test_three_failures_do_not_alert(self):
         self.assertEqual(len(detect(self.scenario(3, 240))), 0)
 
     def test_success_after_window_does_not_alert(self):
-        self.assertEqual(len(detect(self.scenario(5, 900))), 0)
+        alerts = detect(self.scenario(5, 900))
+        self.assertEqual(sum(a["rule"] == "FRONTIER-AUTH-001" for a in alerts), 0)
+        self.assertEqual(sum(a["rule"] == "FRONTIER-AUTH-002" for a in alerts), 1)
 
     def test_different_username_does_not_correlate(self):
         events = self.scenario(5, 240, failure_username="alice",
                                success_username="admin")
-        self.assertEqual(len(detect(events)), 0)
+        alerts = detect(events)
+        self.assertEqual(sum(a["rule"] == "FRONTIER-AUTH-001" for a in alerts), 0)
+        self.assertEqual(sum(a["rule"] == "FRONTIER-AUTH-002" for a in alerts), 1)
 
     def test_different_source_ip_does_not_correlate(self):
         events = self.scenario(5, 240)
         events[-1]["source_ip"] = "192.0.2.11"
-        self.assertEqual(len(detect(events)), 0)
+        alerts = detect(events)
+        self.assertEqual(sum(a["rule"] == "FRONTIER-AUTH-001" for a in alerts), 0)
+        self.assertEqual(sum(a["rule"] == "FRONTIER-AUTH-002" for a in alerts), 1)
 
     def test_out_of_order_events_are_sorted(self):
         events = list(reversed(self.scenario(5, 240)))
-        self.assertEqual(len(detect(events)), 1)
+        alerts = detect(events)
+        self.assertEqual(sum(a["rule"] == "FRONTIER-AUTH-001" for a in alerts), 1)
 
     def test_exact_window_boundary_is_included(self):
         events = [
@@ -74,14 +81,16 @@ class AuthenticationDetectorTests(unittest.TestCase):
         events.append(
             self.event("success", 600, "authentication_success")
         )
-        self.assertEqual(len(detect(events)), 1)
+        alerts = detect(events)
+        self.assertEqual(sum(a["rule"] == "FRONTIER-AUTH-001" for a in alerts), 1)
 
     def test_success_closes_the_previous_failure_sequence(self):
         events = self.scenario(5, 240)
         events.extend([
             self.event("later-success", 300, "authentication_success")
         ])
-        self.assertEqual(len(detect(events)), 1)
+        alerts = detect(events)
+        self.assertEqual(sum(a["rule"] == "FRONTIER-AUTH-001" for a in alerts), 1)
 
 
     def test_brute_force_alerts_at_threshold_without_success(self):
