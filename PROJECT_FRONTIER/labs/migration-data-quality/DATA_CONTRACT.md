@@ -88,7 +88,7 @@ A high pass rate does not prove that records are true, complete in the real worl
 - Stable issue codes and deterministic JSON output.
 - Reference time supplied as an explicit argument.
 - No network calls, external services, databases or runtime secrets.
-- Malformed JSON is diagnosed per line; processing continues.
+- Malformed JSON, duplicate object keys and non-standard numeric constants are diagnosed per line; processing continues. Duplicate keys are rejected rather than silently collapsed by the parser.
 - Do not log or print entire records by default.
 
 ## 9. Versioning
