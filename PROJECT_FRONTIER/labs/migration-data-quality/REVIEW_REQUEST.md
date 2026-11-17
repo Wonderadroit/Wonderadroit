@@ -36,9 +36,9 @@ Please identify defects and unsupported claims, not merely confirm that tests pa
 7. Are tests sufficient? Identify missing boundary, adversarial, property-based, or regression cases that materially affect correctness.
 8. Are the contract, test plan, README and implementation consistent?
 
-### Known documentation discrepancy to assess
+### Documentation versioning note
 
-The current `README.md` still describes the lab as v0.1 and points readers to the historical `DATA_CONTRACT.md` and `TEST_PLAN.md`, while the current implementation and versioned review artefacts are v0.2. Please assess the impact and recommend the correct documentation reconciliation. This discrepancy is disclosed rather than silently treated as resolved.
+The README was reconciled on 17 November 2026 to identify v0.2 as the current implementation and to label the unversioned `DATA_CONTRACT.md` and `TEST_PLAN.md` as historical v0.1 documents. Please still verify that the README, versioned v0.2 contract/test plan, implementation and tests are mutually consistent. The documentation correction is not an independent review finding or approval.
 
 ### Evidence requested
 
