@@ -18,6 +18,7 @@ REQUIRED = {
 ALLOWED = REQUIRED
 ID_RE = re.compile(r"^SYN-[A-Z0-9-]{1,60}$")
 COUNTRY_RE = re.compile(r"^[A-Z]{2}$")
+RFC3339_RE = re.compile(r"^\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}(?:\\.\\d+)?(?:Z|[+-]\\d{2}:\\d{2})$")
 # Deliberately bounded fixture allowlist; this is not a complete ISO registry.
 COUNTRY_CODES = frozenset({
     "NG", "GH", "BJ", "NE", "CM", "GB", "US", "FR", "DE", "CA",
@@ -30,7 +31,7 @@ FUTURE_TOLERANCE = timedelta(hours=24)
 
 
 def _timestamp(value: object) -> datetime | None:
-    if not isinstance(value, str):
+    if not isinstance(value, str) or not RFC3339_RE.fullmatch(value):
         return None
     try:
         parsed = datetime.fromisoformat(value.replace("Z", "+00:00"))
@@ -135,7 +136,7 @@ def validate_records(
         parsed_rows.append({
             "row_number": row_number,
             "record": obj,
-            "record_id": rid if isinstance(rid, str) else None,
+            "record_id": rid if isinstance(rid, str) and ID_RE.fullmatch(rid) else None,
             "issues": issues,
             "event_at_utc": event_at,
             "ingested_at_utc": ingested_at,
