@@ -83,6 +83,80 @@ class AuthenticationDetectorTests(unittest.TestCase):
         ])
         self.assertEqual(len(detect(events)), 1)
 
+
+    def test_brute_force_alerts_at_threshold_without_success(self):
+        events = [
+            self.event(f"fail-{i}", i * 30, "authentication_failure")
+            for i in range(5)
+        ]
+        alerts = detect(events)
+        brute = [alert for alert in alerts if alert["rule"] == "FRONTIER-AUTH-002"]
+        self.assertEqual(len(brute), 1)
+        self.assertEqual(brute[0]["failed_attempts"], 5)
+        self.assertFalse(brute[0]["successful_login"])
+        self.assertEqual(brute[0]["severity"], "MEDIUM")
+
+    def test_brute_force_below_threshold_does_not_alert(self):
+        events = [
+            self.event(f"fail-{i}", i * 30, "authentication_failure")
+            for i in range(4)
+        ]
+        self.assertEqual(len(detect(events)), 0)
+
+    def test_brute_force_alerts_only_once_during_same_burst(self):
+        events = [
+            self.event(f"fail-{i}", i * 10, "authentication_failure")
+            for i in range(8)
+        ]
+        brute = [
+            alert for alert in detect(events)
+            if alert["rule"] == "FRONTIER-AUTH-002"
+        ]
+        self.assertEqual(len(brute), 1)
+
+    def test_brute_force_does_not_combine_different_users_or_ips(self):
+        events = [
+            self.event(f"a-{i}", i * 10, "authentication_failure",
+                       source_ip="192.0.2.10", username="alice")
+            for i in range(3)
+        ] + [
+            self.event(f"b-{i}", i * 10, "authentication_failure",
+                       source_ip="192.0.2.11", username="bob")
+            for i in range(3)
+        ]
+        self.assertEqual(len(detect(events)), 0)
+
+    def test_brute_force_window_expires_and_can_rearm(self):
+        events = [
+            self.event(f"first-{i}", i * 10, "authentication_failure")
+            for i in range(5)
+        ]
+        events.extend([
+            self.event(f"later-{i}", 700 + i * 10, "authentication_failure")
+            for i in range(5)
+        ])
+        brute = [
+            alert for alert in detect(events)
+            if alert["rule"] == "FRONTIER-AUTH-002"
+        ]
+        self.assertEqual(len(brute), 2)
+
+    def test_success_resets_brute_force_burst(self):
+        events = [
+            self.event(f"fail-{i}", i * 10, "authentication_failure")
+            for i in range(5)
+        ]
+        events.append(self.event("success-reset", 60, "authentication_success"))
+        events.extend([
+            self.event(f"after-{i}", 70 + i * 10, "authentication_failure")
+            for i in range(4)
+        ])
+        brute = [
+            alert for alert in detect(events)
+            if alert["rule"] == "FRONTIER-AUTH-002"
+        ]
+        self.assertEqual(len(brute), 1)
+
     def test_duplicate_event_ids_are_skipped(self):
         original = {
             "event_id": "same-id",
