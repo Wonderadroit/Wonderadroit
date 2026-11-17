@@ -180,8 +180,8 @@ class AuthenticationDetectorTests(unittest.TestCase):
             invalid_id = dict(base, event_id="   ")
             invalid_user = dict(base, event_id="other", username="   ")
             path.write_text(
-                json.dumps(invalid_id) + "\\n"
-                + json.dumps(invalid_user) + "\\n",
+                json.dumps(invalid_id) + "\n"
+                + json.dumps(invalid_user) + "\n",
                 encoding="utf-8",
             )
             events, diagnostics, duplicate_count = load_events(path)
