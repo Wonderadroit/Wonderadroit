@@ -242,5 +242,10 @@ class ValidatorTests(unittest.TestCase):
         self.assertEqual(diagnostics[0]["issue_codes"], ["MALFORMED_JSON"])
 
 
+    def test_rfc3339_rejects_non_ascii_digits(self):
+        _, diagnostics, _ = run_rows(record(event_at="２０２６-11-16T10:00:00Z"))
+        self.assertIn("INVALID_EVENT_TIMESTAMP", diagnostics[0]["issue_codes"])
+
+
 if __name__ == "__main__":
     unittest.main()
