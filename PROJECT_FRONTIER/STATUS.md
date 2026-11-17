@@ -95,3 +95,16 @@ Obtain an independent review of the Migration Data Quality Laboratory and resear
 ## Decision rule
 
 A phase is not complete because code was written or a workflow turned green. It is complete only when the stated deliverables, tests, provenance, limitations, and review criteria are satisfied.
+
+
+## v0.2 continuation update — 17 November 2026
+
+The internal provenance finding has been addressed in code: `source_record_id` now requires the synthetic-only pattern `SRC-[A-Z0-9-]{1,60}`. Regression cases reject email-like, phone-like, whitespace-padded, lowercase and non-ASCII lookalike values and test identifier boundaries.
+
+The duplicate policy is now explicit: exact duplicate comparison canonicalises JSON object-key order only; timestamp strings are not semantically normalised before comparison. Equivalent instants written with different offsets therefore count as conflicting payloads under the same record ID. Duplicate/conflict grouping covers all parseable JSON objects, including rows with other validation defects; metric denominators are documented in `DATA_CONTRACT_v0.2.md`.
+
+Versioned files:
+- `labs/migration-data-quality/DATA_CONTRACT_v0.2.md`
+- `labs/migration-data-quality/TEST_PLAN_v0.2.md`
+
+The v0.2 code and tests have been committed. GitHub Actions run 44175844227 was observed in progress; no v0.2 pass claim is made until its final conclusion is checked. Independent review of the lab and the NIS strategy research brief remains outstanding. The earlier v0.1 contract and test-plan files are retained as historical artifacts.
