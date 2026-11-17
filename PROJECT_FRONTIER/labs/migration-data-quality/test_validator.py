@@ -157,6 +157,15 @@ class ValidatorTests(unittest.TestCase):
         _, diagnostics, _ = run_rows(record(record_id="user@example.invalid"))
         self.assertIsNone(diagnostics[0]["record_id"])
 
+    def test_overlong_record_id_rejected_and_not_echoed(self):
+        _, diagnostics, _ = run_rows(record(record_id="SYN-" + "A" * 61))
+        self.assertIn("INVALID_RECORD_ID", diagnostics[0]["issue_codes"])
+        self.assertIsNone(diagnostics[0]["record_id"])
+
+    def test_unknown_two_letter_country_code_rejected(self):
+        _, diagnostics, _ = run_rows(record(origin_country="ZZ"))
+        self.assertIn("INVALID_COUNTRY_CODE", diagnostics[0]["issue_codes"])
+
 
 if __name__ == "__main__":
     unittest.main()
