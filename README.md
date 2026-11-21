@@ -1,15 +1,15 @@
 <div align="center">
 
-# Wonderadroit
+# Wonder Olabisi · Wonderadroit
 
-### Software Engineer · Security Engineering · DevSecOps
+### Computer Science · Security Engineering · Migration Technology
 
-**Building practical software systems, security automation, and developer tooling.**
+**Building evidence-driven software and research projects across cybersecurity, data quality, digital systems, and border security.**
 
 [![GitHub](https://img.shields.io/badge/GitHub-Wonderadroit-181717?logo=github)](https://github.com/Wonderadroit)
 [![Python](https://img.shields.io/badge/Python-3776AB?logo=python&logoColor=white)](https://www.python.org/)
-[![Security Engineering](https://img.shields.io/badge/Security-Engineering)](#focus)
-[![DevSecOps](https://img.shields.io/badge/DevSecOps-Automation)](#focus)
+[![Security Engineering](https://img.shields.io/badge/Security-Engineering-blue)](#security-engineering)
+[![Project Frontier](https://img.shields.io/badge/Research-Project%20Frontier-3157A4)](#border-security--migration-technology)
 
 </div>
 
@@ -17,84 +17,79 @@
 
 ## About
 
-I build software with a security-first mindset, with current interests across **software engineering, security engineering, DevSecOps, Python automation, backend systems, and Web3 security**.
+I am a Computer Science undergraduate building practical technical projects and developing research interests at the intersection of **security engineering, cybersecurity, data quality, digital systems, and border security and migration technology**.
 
-I am interested in turning complex technical problems into systems that are **observable, testable, reproducible, and maintainable**.
+My work combines hands-on software development with evidence-led investigation. I am interested in how reliable software, trustworthy information, secure digital identity, and responsible technology can support institutions and public-interest systems.
 
-My working approach is evidence-driven: understand the system, make assumptions explicit, collect evidence, test those assumptions, verify the result, and automate repeatable work.
+I value clear technical boundaries, reproducible tests, transparent limitations, and independent review. I distinguish working prototypes and research experiments from production-ready systems.
 
-## Focus
+## Three areas of focus
 
-| Area | What I work on |
-|---|---|
-| **Software Engineering** | Python, backend development, architecture, testing, and maintainability |
-| **Security Engineering** | Application security, security analysis, testing, and verification |
-| **DevSecOps** | CI/CD security checks, secure development workflows, and automation |
-| **Automation** | Developer tooling and repeatable technical workflows |
-| **Web3 Security** | Ethereum/Solidity and Solana/Rust security tooling and analysis |
+### 1. Security engineering
 
-## Selected Public Work
+Developing and testing tools and workflows for application security, authorised security research, secure software delivery, and repeatable technical verification.
 
-### 🛡️ Multi-Chain Web3 DevSecOps Template
+**Selected work**
+- [CYDRA Web2](https://github.com/Wonderadroit/Cydra_web2) — evidence-led web security and QA research.
+- [CYDRA](https://github.com/Wonderadroit/Cydra_wonder) — evidence-first security research, with a focused smart-contract authorisation investigation.
+- [Multi-Chain Web3 DevSecOps Template](https://github.com/Wonderadroit/solana-devsecops-template) — reusable security automation concepts for Ethereum/Solidity and Solana/Rust projects.
 
-A reusable security-engineering template exploring automated analysis for Ethereum/Solidity and Solana/Rust projects.
+### 2. Data quality and digital systems
 
-**Technologies:** Python · Rust · Solidity · Solana · Anchor · GitHub Actions
+Building practical software that makes information processing more reliable, testable, and explainable.
 
-### 🔎 CodeAlpha Security Tasks
+**Selected work**
+- [Migration Data Quality Laboratory](https://github.com/Wonderadroit/Wonderadroit/tree/project-frontier/migration-data-quality-lab/PROJECT_FRONTIER/labs/migration-data-quality) — a synthetic-data laboratory for validating migration-style records, documenting data-quality rules, and testing reproducible outcomes.
+- [Django Grant Management](https://github.com/Wonderadroit/django-grant-management-) — a backend application demonstrating Django models, an API, migrations, and automated tests.
 
-Hands-on Python cybersecurity exercises covering packet analysis, networking, and system-level inspection.
+### 3. Border security and migration technology
 
-**Technologies:** Python · Scapy · Networking · Security tooling
+**[Project Frontier](https://github.com/Wonderadroit/Wonderadroit/tree/project-frontier/foundation/PROJECT_FRONTIER)** is an independent learning, applied research, and technical portfolio initiative exploring border security, migration governance, cybersecurity, digital identity, data quality, and responsible technology.
 
-### 🧩 Django Grant Management
+It is not an official government or Nigeria Immigration Service project, and it is not an operational border system. Its work uses public sources and synthetic or public aggregate data, with privacy, authorisation, and human oversight treated as essential constraints.
 
-A Django web-application project exploring backend application structure and practical web engineering.
+## Engineering and research principles
 
-**Technologies:** Python · Django · Web development
+- **LLMs propose. Tools test. Evidence decides.**
+- Understand a system and its constraints before changing it.
+- Make assumptions explicit and test them.
+- Treat failed, blocked, and inconclusive experiments honestly.
+- Prefer reproducible evidence over unsupported claims.
+- Build security and privacy into the design.
+- Document limitations and distinguish prototypes from production systems.
+- Use only systems and data that are authorised for the intended work.
 
-### ⚙️ DevSecOps Pipeline
-
-An experimental project exploring how security checks can be integrated into software delivery workflows.
-
-**Technologies:** GitHub Actions · CI/CD · DevSecOps
-
-## Engineering Principles
-
-- **Understand before changing** — model the system and its constraints first.
-- **Evidence over assumptions** — verify behavior instead of relying on intuition.
-- **Secure by default** — treat security as part of engineering, not an afterthought.
-- **Reproducibility matters** — document setup, tests, and meaningful workflows.
-- **Automate repeatable work** — reduce avoidable manual effort.
-- **Be honest about maturity** — distinguish experiments, prototypes, and production-ready software.
-
-## Typical Workflow
+## Working approach
 
 ```text
-Understand → Model → Implement → Test → Verify → Automate → Document
+Research → Model → Build → Test → Verify → Document → Review → Improve
 ```
 
-## Current Technical Interests
+## Current technical interests
 
-- Application and software security
-- Secure CI/CD and software supply chains
-- Security automation and developer tooling
-- Smart-contract security
-- Backend systems and reliable software architecture
-- Python-based engineering and automation
+- Application security and authorised security testing
+- Cybersecurity monitoring and defensive automation
+- Python engineering and backend systems
+- Data quality, governance, and responsible analysis
+- Digital identity, privacy, and interoperability
+- Border security and migration governance
+- Technology policy and international cooperation
 
-## Open to
+## Collaboration
 
-I am interested in **software engineering, security engineering, DevSecOps, application security, and security automation** opportunities where I can solve difficult technical problems, contribute to real systems, and continue growing through rigorous engineering work.
+I welcome constructive technical and research feedback, especially on reproducibility, data quality, security boundaries, documentation, and evidence standards.
+
+For project-specific feedback, please use the relevant repository's Issues or review instructions. Do not submit credentials, personal data, real traveller records, biometric information, or sensitive operational details.
 
 ## Contact
 
 - GitHub: [@Wonderadroit](https://github.com/Wonderadroit)
+- Portfolio: [Wonderadroit.github.io](https://Wonderadroit.github.io/)
 
 ---
 
 <div align="center">
 
-**Build · Test · Verify · Improve**
+**Build · Test · Verify · Review · Improve**
 
 </div>
