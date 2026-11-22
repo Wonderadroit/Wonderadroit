@@ -17,6 +17,8 @@ The initiative combines documentary and policy research with small, reproducible
 
 - [Research identity and scope](RESEARCH_SCOPE.md)
 - [Initial research agenda and literature map](RESEARCH_AGENDA.md)
+- [Preliminary literature comparison](LITERATURE_COMPARISON.md)
+- [Method and evidence doctrine](METHOD_AND_EVIDENCE_DOCTRINE.md)
 
 ## Operating principles
 
@@ -62,6 +64,8 @@ The migration data-quality laboratory has a recorded 45-test Python 3.12 CI run.
 - [Research protocol](RESEARCH_PROTOCOL.md)
 - [Research scope](RESEARCH_SCOPE.md)
 - [Research agenda](RESEARCH_AGENDA.md)
+- [Literature comparison](LITERATURE_COMPARISON.md)
+- [Method and evidence doctrine](METHOD_AND_EVIDENCE_DOCTRINE.md)
 - [Skills and evidence matrix](SKILLS_MATRIX.md)
 - [Research source register](research/SOURCES.md)
 - [Laboratory standards](labs/README.md)
