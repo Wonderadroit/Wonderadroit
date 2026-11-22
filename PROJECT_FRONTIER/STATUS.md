@@ -285,3 +285,15 @@ Next decision: do not add features. Obtain independent technical/data-quality re
 **Updated assessment:** The UN NQAF is a system-wide official-statistics quality framework, not a record-validation checklist. Frontier's v0.2 validator operates at the narrow record/contract level. It cannot establish source authenticity, population completeness, statistical representativeness, end-to-end production quality or institutional governance. The research question has been narrowed accordingly, but remains a candidate rather than a novelty claim.
 
 **No implementation changes:** No code or test changes were made; no tests were run. No independent review or fieldwork was conducted. PR #4 remains draft and unmerged.
+
+
+## Portfolio alignment and repository hygiene — 22 November 2026
+
+- [x] Added `RESEARCH_PORTFOLIO_ARCHITECTURE.md` to define the relationship and boundaries between CYDRA Web3 and Project Frontier.
+- [x] Linked the portfolio architecture from the Frontier README.
+- [x] Explicitly kept the projects separate: CYDRA is a technical authorization-security research engine; Frontier is a multidisciplinary migration-data, digital-identity and technology-governance research programme.
+- [x] Recorded transferable methods without transferring or conflating evidence: version pinning, provenance, paired controls, fail-closed handling, reproducibility and honest limitations.
+
+**Next:** Continue the Frontier requirements-to-evidence comparison and literature reading. Keep the existing v0.2 lab stable pending independent technical and policy review. The email/outreach thread is outside repository work and has not been opened, edited, replied to or followed up as part of this update.
+
+No code or tests changed or ran in this documentation-only update. PR #4 remains draft and unmerged.
