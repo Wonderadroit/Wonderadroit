@@ -222,3 +222,22 @@ Next:
 - [ ] Do not add features or claim a research gap until those reviews and full literature comparison are complete.
 
 PR #4 remains draft and unmerged. No outreach emails were sent or changed.
+
+
+## Regional policy evidence update — 22 November 2026
+
+- [x] Added `REGIONAL_POLICY_EVIDENCE_UPDATE_2026.md` with additional institutional sources from ECOWAS, NIS, ICMPD, ILO and IOM.
+- [x] Recorded ECOWAS's public report that ministers formally endorsed a Border Management Strategy and Action Plan in April 2026, including a stated plan to link systems such as MIDAS and PISCES and a December 2026 target for mutual acceptance of ENBIC.
+- [x] Recorded the NIS public account of the 27–30 September 2026 review workshop for the 2019–2023 NBMS and preparation for the 2027–2031 cycle.
+- [x] Identified FMM West Africa II (2024–2029) and the May 2026 ILO/ECOWAS/IOM regional data-harmonisation workshop as active prior work that Frontier must map.
+- [x] Recorded the IOM 2026 Essentials guide's official catalogue contents. Full-text access was blocked in this review; no chapter-level reading is claimed.
+
+**Research consequence:** Broad claims of novelty in migration-data harmonisation, generic data-quality checks or regional border interoperability are not defensible. The formal ECOWAS strategy, technical annexes, regional assessment and agreed indicator materials remain outstanding. Public announcements establish reported commitments and review activity, not implementation success or system architecture.
+
+Next:
+- [ ] Obtain the formal ECOWAS Border Management Strategy and Action Plan and FMM II regional assessment/indicator materials.
+- [ ] Obtain the complete IOM 2026 guide and annotate page-level requirements.
+- [ ] Obtain the approved/published Nigeria 2027–2031 NBMS when available; until then cite only the NIS workshop account.
+- [ ] Reassess the candidate paper against these existing initiatives before making any novelty or gap claim.
+
+No tests were run. No outreach emails were sent or changed. PR #4 remains draft/unmerged.
