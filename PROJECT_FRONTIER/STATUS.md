@@ -138,3 +138,31 @@ The review package is preparation for human review, not the review itself. Do no
 - [x] Explicitly labelled `DATA_CONTRACT.md` and `TEST_PLAN.md` as retained historical v0.1 documents.
 - [x] Updated `REVIEW_REQUEST.md` so independent reviewers assess consistency across the current README, v0.2 contract/test plan, implementation and tests rather than a discrepancy that has now been corrected.
 - [ ] Independent technical review and independent NBMS policy-source review remain outstanding. Documentation correction does not close either review gate.
+
+
+
+## Research direction update — 22 November 2026
+
+The research identity and scope are now drafted in `RESEARCH_SCOPE.md`, with three candidate studies and a literature map in `RESEARCH_AGENDA.md`.
+
+**Proposed research identity:** Project Frontier investigates how data governance, digital identity and cybersecurity practices can support trustworthy, rights-respecting and interoperable migration and border-management systems in West Africa.
+
+**Priority 1:** Prepare a methods paper on the synthetic Migration Data Quality Laboratory v0.2. This is not yet a publication-ready paper. Independent technical review and separate policy-source review remain prerequisites.
+
+**Priority 2:** Conduct a structured literature review on digital identity and border technology in West Africa, beginning with the identified work by Ngozi Louis Uzomah and Victor Chidubem Iwuoha.
+
+**Priority 3:** Develop a documentary and synthetic-architecture study of secure, accountable interoperability.
+
+Completed in this update:
+- [x] Drafted research identity and scope.
+- [x] Defined three candidate research questions, methods, evidence boundaries and publication gates.
+- [x] Added a preliminary literature map and source links for Uzomah, Iwuoha and ICMPD.
+- [x] Updated the project README/navigation to reflect the focused research identity.
+
+Still open:
+- [ ] Verify the proposed scope against the full existing source register and legal/policy brief.
+- [ ] Read and annotate full papers, not only abstracts or institutional profiles.
+- [ ] Identify and obtain independent reviewers for the technical lab and policy brief.
+- [ ] Complete the first paper's traceability matrix and manuscript after review.
+
+The literature map is preliminary, not an exhaustive systematic review. The three questions are candidates, not claims of originality. No independent reviewer, institutional partnership or endorsement is recorded.
