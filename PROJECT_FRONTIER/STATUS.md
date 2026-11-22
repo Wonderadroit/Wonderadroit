@@ -204,3 +204,21 @@ Next:
 - [ ] Freeze the exact artefact and obtain independent technical and separate policy review before drafting publication claims.
 
 No tests were run for these documentation-only changes. No email outreach was changed or sent. PR #4 remains draft/unmerged.
+
+
+## Migration Data Quality traceability review — 22 November 2026
+
+- [x] Inspected the v0.2 contract, implementation, both test modules and test plan on branch `project-frontier/migration-data-quality-lab`.
+- [x] Enumerated all **45** recorded tests: 40 in `test_validator.py`, 5 in `test_run_lab.py`.
+- [x] Added `MIGRATION_DATA_QUALITY_TRACEABILITY.md` to map implementation rules and exact tests against completeness, validity, consistency, uniqueness/conflict, timeliness, provenance, privacy minimisation and reproducibility.
+- [x] Recorded what the tests do not establish, including population completeness, truth, external source authenticity, cross-record integrity, operational timeliness, privacy/security assurance, scale, independent reproduction and rights impacts.
+- [x] Reframed the lab accurately as a synthetic contract-validation demonstrator, not a validated migration-data quality framework or assessment of Nigerian/ECOWAS systems.
+
+**Assessment:** The 45-test suite gives meaningful evidence of deterministic behaviour for the narrow synthetic contract. It does not test the quality or completeness of real migration data. No new tests were run in this traceability review, and this review is AI-assisted desk analysis, not independent technical or policy review.
+
+Next:
+- [ ] Obtain human technical review of contract choices, parser/time boundary, duplicate policy, metrics and privacy controls.
+- [ ] Obtain separate policy/data-governance review of the dimensions and their relevance to ECOWAS/Nigeria.
+- [ ] Do not add features or claim a research gap until those reviews and full literature comparison are complete.
+
+PR #4 remains draft and unmerged. No outreach emails were sent or changed.
