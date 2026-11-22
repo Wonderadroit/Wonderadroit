@@ -19,6 +19,7 @@ The initiative combines documentary and policy research with small, reproducible
 - [Initial research agenda and literature map](RESEARCH_AGENDA.md)
 - [Preliminary literature comparison](LITERATURE_COMPARISON.md)
 - [Method and evidence doctrine](METHOD_AND_EVIDENCE_DOCTRINE.md)
+- [Research portfolio architecture: CYDRA and Frontier](RESEARCH_PORTFOLIO_ARCHITECTURE.md)
 
 ## Operating principles
 
