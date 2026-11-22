@@ -132,3 +132,128 @@ For each selected paper:
 3. Identify a suitable independent technical reviewer and policy reviewer; do not count the author or an AI-generated critique as independent review.
 4. Prepare the first paper only after the review gate and traceability matrix are complete.
 5. Contact researchers with a concise, specific request for scholarly feedback—not an implied request for endorsement or employment.
+
+
+---
+
+## Preliminary literature analysis — first reading pass
+
+**Reading date:** 22 November 2026  
+**Status:** Preliminary source-based notes. These are not a systematic review and do not substitute for reading every section, checking cited evidence, or obtaining author clarification.
+
+### Study A — Uzomah (2024)
+
+**Citation:** Uzomah, N. L. (2024). *European Union border technology in Africa: Experiences en route*. Population, Space and Place, 30(8), e2824. https://doi.org/10.1002/psp.2824
+
+**Source inspected:** Publisher article page, abstract and visible reference list.
+
+**Research purpose and scope:** Examines the effects of technology-enabled border governance associated with EU externalisation in Africa. The abstract identifies MIDAS deployment in Nigeria, risk-analysis cells in Niger and biometric registration in Mauritania.
+
+**Method reported:** Non-participant observation, informal/instant interactions and 78 semi-structured interviews with migrants, cross-border traders, government officials, civil-society organisations, motorists, residents and media along two routes: Nigeria–Niger and Mauritania–Western Sahara (Morocco).
+
+**Reported argument/findings:** The author argues that the examined technology interventions affected migrants' mobility and rights, and that data sharing across European digital platforms can contribute to migration-control and deportation processes. These are the author's reported findings and interpretation; Frontier must not present them as independently verified operational facts without examining the full study and corroborating sources.
+
+**Relevance to Frontier:**
+- The article directly connects to Nigeria and technology-enabled migration management.
+- It demonstrates that technical deployments must be evaluated alongside data governance, mobility outcomes, rights and institutional power.
+- It cautions against assuming that digitisation or biometric collection automatically improves security or governance.
+- It provides a basis for investigating system purpose, data flows, access, sharing, retention, oversight and redress.
+
+**Questions for full-text reading:**
+1. How were the 78 interview participants selected, and how are the two routes and countries represented?
+2. What specific evidence supports each claim about data sharing and the use of collected data?
+3. How does the paper distinguish observed practices, participant accounts and the author's interpretation?
+4. What limitations does the author identify concerning access, sample, time period and generalisability?
+5. What technical details of MIDAS and other systems are documented, and which remain outside the study's scope?
+
+### Study B — Iwuoha and Doevenspeck (2023 online; journal issue 2025)
+
+**Citation:** Iwuoha, V. C., & Doevenspeck, M. (2025 issue; published online 26 May 2023). *Dilemmas of ‘biometric nationality’: migration control, biometric ID technology and political mobilisation of migrants in West Africa*. Territory, Politics, Governance, 13(3), 279–304. https://doi.org/10.1080/21622671.2023.2205885
+
+**Source inspected:** Publisher abstract and bibliographic information.
+
+**Research purpose:** Examines how biometric ID technology intersects with migration control and political mobilisation of migrants in West Africa.
+
+**Method reported in abstract:** Qualitative in-depth study involving migrants from Chad, Niger, Benin, Cameroon and Togo in Nigeria.
+
+**Reported argument/findings:** The authors identify regional migration regimes, state identity politics/policies, monetary inducement and biometric ID technology as structures facilitating migration instrumentalisation for electoral purposes. They argue that biometric systems can be used in ways that complicate claims to political belonging and nationality.
+
+**Relevance to Frontier:**
+- Identity assurance is not the same as determining nationality or legal status.
+- Biometric enrolment and identity systems operate within legal, political and institutional contexts.
+- Technical design must not silently convert a biometric match, enrolment record or identifier into a conclusion about citizenship or entitlement.
+- Data quality and identity resolution errors can have consequences beyond ordinary database defects.
+
+**Questions for full-text reading:**
+1. What is the precise relationship the authors establish between biometric enrolment, NIN/e-ID issuance and claims of nationality?
+2. What evidence supports the four identified structures?
+3. How are the participants and locations selected?
+4. Which legal provisions and institutional practices are analysed?
+5. What safeguards or alternative institutional designs are discussed, if any?
+
+### Study C — Iwuoha (2025)
+
+**Citation:** Iwuoha, V. C. (2025). *European Biometric Borders and (Im)Mobilities in West Africa: Reflections on Migrant Strategies for Border Circumvention and Subversion*. Politics & Policy, 53(1), e12653. https://doi.org/10.1111/polp.12653
+
+**Source inspected:** Open-access publisher full-text page, including abstract, introduction, conceptual framing and conclusion.
+
+**Research purpose and scope:** Uses Niger and the Burkina Faso–Niger border context to examine how European biometric installations and border securitisation shape migration and mobility.
+
+**Conceptual contribution:** The author introduces “biometric reborderization” and “agentic deborderization” to describe, respectively, the reconfiguration of border control through biometric infrastructure and migrants' efforts to negotiate or circumvent its effects.
+
+**Reported argument:** The author argues that biometric border processes can interact with identity conflicts and social exclusion, and that migrants may respond through alternative mobility strategies. The article questions whether security interventions achieve their stated aims when they produce unintended effects.
+
+**Relevance to Frontier:**
+- A border technology system must be evaluated as a socio-technical system, not only as software or hardware.
+- Security effectiveness, lawful mobility, inclusion, privacy and accountability can conflict; these trade-offs should be made explicit.
+- System performance cannot be inferred from installation, enrolment volume or data capture alone.
+- Frontier's technical work should avoid designing circumvention guidance or operational route intelligence. Its contribution should remain at the level of governance analysis, defensive architecture, synthetic testing and rights-aware evaluation.
+
+**Questions for full-text reading:**
+1. What field evidence supports the concepts introduced, and how are they operationalised?
+2. What are the limits of transferring findings from Niger to Nigeria or other ECOWAS states?
+3. Which claims concern system design, which concern implementation, and which concern broader political outcomes?
+4. What alternative explanations or counter-evidence are considered?
+5. What measurable technical or governance criteria could future research use without reproducing the harms identified?
+
+### Cross-paper synthesis: what this changes in Frontier's approach
+
+These studies establish that the digitalisation of borders is already a substantial research field. Frontier must not claim novelty merely because it combines migration, biometrics and cybersecurity.
+
+The strongest contribution available to Frontier at this stage is narrower and more defensible:
+
+**Develop reproducible, privacy-minimising technical methods for examining data quality, provenance, access control and accountability in synthetic migration-information workflows, while situating those methods in the documented legal, institutional and human consequences of border technologies.**
+
+This suggests five design requirements for all Frontier laboratories:
+
+1. **Purpose limitation:** define why each data field exists and what decisions it must never determine.
+2. **Provenance and contestability:** record where data came from, how it changed, and how errors can be corrected.
+3. **Separation of identity concepts:** distinguish identifier, identity proofing, authentication, biometric match, nationality and legal status.
+4. **Access and accountability:** model who may access or share data, under what authority, for what purpose, and with what audit trail.
+5. **Rights-aware evaluation:** test not only whether a pipeline accepts or rejects records, but also whether errors, missing data and uncertainty are surfaced without automated adverse conclusions.
+
+These are proposed Frontier design principles informed by the literature, not claims that the cited authors endorse Frontier or that the principles are already implemented in every laboratory.
+
+### Research gap: current assessment
+
+A defensible gap has **not yet been established**. The reviewed studies focus substantially on migration governance, biometric border practices, political identity, mobility and rights. Frontier's proposed technical laboratory work may complement this literature, but a claim that there is little or no technical work in this area would require a broader search across computer science, information systems, public administration, data governance and digital identity research.
+
+Before claiming a contribution, compare Frontier's proposed methods with:
+- Existing migration-data quality frameworks and data-quality measurement research.
+- IOM's published MIDAS documentation and data-protection materials.
+- Public biometric identity and digital public infrastructure standards.
+- Nigerian data-protection and identity-management legal frameworks.
+- Existing research on interoperability, access control, auditability and algorithmic accountability in migration systems.
+
+### Current reading status and next gate
+
+- [x] Publisher abstract and bibliographic details reviewed for Uzomah (2024).
+- [x] Publisher abstract and bibliographic details reviewed for Iwuoha & Doevenspeck (2023/2025).
+- [x] Open-access full-text page reviewed for Iwuoha (2025), including introduction and conclusion.
+- [ ] Read and annotate the complete Uzomah article.
+- [ ] Obtain and read the complete Iwuoha & Doevenspeck article.
+- [ ] Verify cited legal and institutional claims against primary sources.
+- [ ] Compare Frontier's laboratory design with existing technical standards and research.
+- [ ] Revise research questions only after the literature comparison.
+
+**Important:** These notes are a first reading pass based on publisher-visible material. They are not a substitute for complete full-text reading of all three papers, and they do not establish a novel research gap.
