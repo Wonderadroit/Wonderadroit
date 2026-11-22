@@ -241,3 +241,22 @@ Next:
 - [ ] Reassess the candidate paper against these existing initiatives before making any novelty or gap claim.
 
 No tests were run. No outreach emails were sent or changed. PR #4 remains draft/unmerged.
+
+
+## Follow-up regional source review — 22 November 2026
+
+- [x] Repeated the search for the formal ECOWAS Border Management Strategy and Action Plan, FMM II regional assessments, Praia indicator materials and supporting documents.
+- [x] Added the publicly accessible FMM II programme factsheet and Demand Driven Facility guidelines to the regional evidence update.
+- [x] Located ILO's November 2025 account of ECOWAS/ILO validation of a labour-migration data roadmap and harmonised indicators, predating the May 2026 Praia workshop.
+- [x] Located ECOWAS's August 2026 account of its sixth regional migration-statistics coordination meeting and review/validation of the third Regional Report on International Migration in West Africa.
+
+**Updated assessment:** Regional migration-data quality, indicator harmonisation, border management and legal-identity management are clearly established institutional workstreams. Frontier should not create or claim ownership of another generic framework. The only sensible next research step is a bounded requirements-to-evidence comparison of the existing synthetic validator against published standards and accessible institutional guidance, followed by independent review.
+
+Still unavailable for direct analysis in this search:
+- [ ] The actual ECOWAS Border Management Strategy and Action Plan and annexes.
+- [ ] The 2026 FMM II regional assessment reports.
+- [ ] The Praia workshop's agreed indicator list and technical training materials.
+- [ ] The revised ECOWAS migration-data guidelines and third Regional Report.
+- [ ] Full text of IOM's 2026 Essentials guide.
+
+The search did not establish that these documents do not exist or cannot be obtained through institutional channels. No novelty/gap claim is made. No tests were run. PR #4 remains draft and unmerged.
