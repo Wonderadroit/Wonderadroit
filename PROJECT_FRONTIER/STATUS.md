@@ -185,3 +185,22 @@ Next:
 - [ ] Complete full-text annotations for all three studies.
 - [ ] Compare proposed laboratory methods with existing technical standards and research.
 - [ ] Reassess the first paper's contribution after that comparison.
+
+
+## Literature comparison and doctrine update — 22 November 2026
+
+- [x] Adapted CYDRA's evidence principle into a Frontier research doctrine in `METHOD_AND_EVIDENCE_DOCTRINE.md`: “Sources frame. Methods test. Evidence decides. Humans interpret and remain accountable.”
+- [x] Added a preliminary literature comparison in `LITERATURE_COMPARISON.md`, including IOM ECOWAS guidance (2019), IOM's Nigeria migration-data assessment (2013), IOM's Essentials of Migration Data (2026), Ibor et al. (2025), West African biometric-border scholarship, ECOWAS's May 2026 public announcement and Nigeria's data-protection instruments.
+- [x] Identified a current policy-research lead: ECOWAS reported ministerial endorsement of a Border Management Strategy and Action Plan and proposed integration of systems including MIDAS and PISCES. The formal strategy/action plan has not yet been obtained or analysed.
+- [x] Added an evaluation matrix for the synthetic migration-event validator: completeness, validity, consistency, uniqueness/conflict, timeliness, provenance, privacy minimisation and reproducibility.
+
+**Assessment:** No defensible novelty claim or research gap has been established. Migration-data harmonisation and cross-border identity interoperability are already established areas. The first paper remains a candidate bounded design-and-evaluation study, not a publication-ready or independently validated contribution.
+
+Next:
+- [ ] Read the full IOM ECOWAS guidelines, Nigeria 2013 assessment and IOM 2026 Essentials guide, recording page-level requirements.
+- [ ] Complete full-text reading of Ibor et al. and outstanding Uzomah/Iwuoha papers.
+- [ ] Obtain the formal ECOWAS Border Management Strategy and Action Plan referenced in the May 2026 announcement.
+- [ ] Map every v0.2 validator rule and test to the literature-derived requirements and evaluation matrix.
+- [ ] Freeze the exact artefact and obtain independent technical and separate policy review before drafting publication claims.
+
+No tests were run for these documentation-only changes. No email outreach was changed or sent. PR #4 remains draft/unmerged.
