@@ -1,7 +1,7 @@
 # Project Frontier — Status
 
 **Last reviewed:** 2026-11-17  
-**Current phase:** Phase 0 — Baseline and research design  
+**Current phase:** Phase 1 — First reproducible synthetic data-quality prototype  
 **Overall state:** IN PROGRESS
 
 ## Verified starting assets
@@ -38,22 +38,48 @@ These are repository-level indicators of software engineering practice. They do 
 - [x] Evidence-first operating rules and phase gates defined.
 - [x] Initial public-repository inventory reviewed.
 - [x] Initial primary-source register created with official NIS, ECOWAS and NIST materials.
-- [x] Initial research question proposed for Nigeria's 2027–2031 National Border Management Strategy.\n- [x] Initial NIS strategic-alignment note added, mapping public NIS priorities to safe Frontier portfolio capabilities.
+- [x] Initial research question proposed for Nigeria's 2027–2031 National Border Management Strategy.
+- [x] Initial NIS strategic-alignment note added, mapping public NIS priorities to safe Frontier portfolio capabilities.
 - [x] Digital Identity Laboratory scope, draft data contract and initial threat model created using synthetic-only assumptions.
+- [x] Migration Data Quality Laboratory v0.1 data contract and executable test plan documented.
+- [x] Migration Data Quality Laboratory v0.1 validator, CLI, synthetic fixtures and regression suite implemented; 41 tests passed in GitHub Actions run 44174686867.
+- [x] First source-checked research brief drafted for the 2027–2031 National Border Management Strategy, distinguishing official facts, recommendations and unknowns.
+- [x] First synthetic-only validator and command-line runner implemented.
+- [x] Synthetic fixture and deterministic accepted/diagnostics/summary outputs added.
+- [x] GitHub Actions regression suite passed on Python 3.12; synthetic fixture run succeeded.
 
 ## Active
 
+- [ ] Independent review of duplicate/conflict semantics, field typing, time handling, metrics and privacy boundaries.
+- [x] Add strict invalid-UTF-8 file-reader test and identifier/country-code boundary tests.
+- [x] Address the internal v0.1 provenance and duplicate-semantics findings through a versioned v0.2 change and regression tests; independent review remains open.
 - [ ] Complete practical networking/Linux/Python/data baseline.
-- [ ] Review Nigerian legal and policy sources relevant to identity data, privacy and border management.\n- [ ] Convert the NIS 2027–2031 alignment note into a source-checked policy brief; the new note is a planning baseline, not a completed research brief.
-- [ ] Draft the first research brief with page/section-level citations and limitations.
-- [x] Review and freeze the first implementation profile for the Digital Identity Laboratory (Ed25519, fixed demo issuer, strict synthetic schema).
-- [ ] Obtain a successful CI run and complete independent code/test review.
+- [ ] Review Nigerian legal and policy sources relevant to identity data, privacy and border management.
+- [ ] Obtain independent review of the Migration Data Quality Laboratory and research brief; reconcile any substantive review findings.
+- [ ] Obtain a successful CI run and complete independent code/test review for the Digital Identity Laboratory.
+- [ ] Review Security Monitoring Lab false-positive boundaries before extending detection logic.
 
-## Current prototype decision
+## Current prototype decisions
 
-The Digital Identity Laboratory is being designed as a local educational verifier for fictional credentials only. It will demonstrate strict schema validation, a configured demo issuer, payload-integrity checks, expiry checks, duplicate-presentation handling and privacy-minimised audit events.
+### Digital Identity Laboratory
+
+The Digital Identity Laboratory is a local educational verifier for fictional credentials only. It is designed to demonstrate strict schema validation, a configured demo issuer, payload-integrity checks, expiry checks, duplicate-presentation handling and privacy-minimised audit events.
 
 A first verifier and unit-test suite have been committed. It uses Ed25519, strict schema checks, UTC validity checks, in-memory duplicate detection and allow-listed audit events. The GitHub Actions workflow has been added, but a successful run has not yet been observed; implementation is therefore not yet validated. No real passport, national-ID, biometric, traveller or government data will be used. A successful lab check will not be represented as proof of a presenter's identity, legal status or eligibility.
+
+### Migration Data Quality Laboratory
+
+The v0.1 prototype is under PROJECT_FRONTIER/labs/migration-data-quality/. It accepts a narrow fictional movement-event schema with no personal identity fields. It validates required fields, controlled values, timestamp offsets/order, a bounded country-code fixture allowlist, duplicate record IDs, conflicting record IDs and duplicate source references. It emits accepted JSONL, row-level diagnostics and a summary with issue counts, field missingness denominators/rates and ingestion-lag count/min/max/mean.
+
+The v0.1 CI run on Python 3.12 passed 41 unit tests and executed the synthetic fixture (run 44174686867). The v0.2 implementation subsequently passed 45 tests and the synthetic CLI fixture in run 44176377842 (commit `c13c1f85fe677227e194f9ee18968d37ca3de653`). The fixture produced 3 input object records, 1 accepted record and 2 rejected dispositions (one exact duplicate and one same-origin/destination record). This proves only the tested contract behaviour on synthetic inputs. It does not establish real-world migration data quality, truth, representativeness or operational suitability.
+
+The country-code allowlist is intentionally limited and is not a complete or authoritative ISO registry. The documented v0.1 executable test cases include strict rejection of duplicate JSON keys and non-standard numeric constants, ASCII-only RFC 3339 timestamps and strict CLI reference-time parsing; independent review remains outstanding.
+
+An internal self-review identified a gap in v0.1 provenance validation. v0.2 now constrains `source_record_id` to a synthetic token pattern, adds negative regression cases, and limits duplicate provenance grouping to valid synthetic record IDs. The token pattern is a format constraint, not proof of synthetic origin. This is an internal finding and remediation, not an independent review.
+
+## Security Monitoring Laboratory
+
+The authentication detector is a separate defensive workstream under labs/security-monitoring/auth-detection/. Verified v0.2 CI run 44143393201 completed successfully on commit d239b46f882f78f2bbce63624b12262f9290b741; its suite ran 17 tests and the synthetic fixture generated the expected two alerts. This validates only the listed synthetic cases, not production readiness or real-world detection effectiveness. No production SIEM capability is claimed.
 
 ## Blockers / constraints
 
@@ -64,8 +90,210 @@ A first verifier and unit-test suite have been committed. It uses Ed25519, stric
 
 ## Next action
 
-Use the NIS 2027–2031 alignment note to guide the next deliverables: first, a source-checked policy brief; second, a synthetic migration-data quality lab with a documented data contract and measurable tests. Continue the authentication detector and digital identity verifier as supporting technical workstreams. Complete the networking/Linux baseline and primary-source legal review. Do not build a broad dashboard.
+Obtain an independent review of the v0.2 Migration Data Quality Laboratory and the NBMS research brief. Resolve substantive findings, then produce a compact synthetic demonstration dataset and reproducible quality report. Do not build a broad dashboard.
 
 ## Decision rule
 
 A phase is not complete because code was written or a workflow turned green. It is complete only when the stated deliverables, tests, provenance, limitations, and review criteria are satisfied.
+
+
+## v0.2 continuation update — 17 November 2026
+
+The internal provenance finding has been addressed in code: `source_record_id` now requires the narrow token format `SRC-[A-Z0-9-]{1,60}`. This is a format constraint, not proof of synthetic origin; repository fixtures must remain generated fictional data. Regression cases reject email-like, phone-like, whitespace-padded, lowercase and non-ASCII lookalike values and test identifier boundaries.
+
+The duplicate policy is now explicit: exact duplicate comparison canonicalises JSON object-key order only; timestamp strings are not semantically normalised before comparison. Equivalent instants written with different offsets therefore count as conflicting payloads under the same record ID. Duplicate/conflict grouping covers all parseable JSON objects, including rows with other validation defects; metric denominators are documented in `DATA_CONTRACT_v0.2.md`.
+
+Versioned files:
+- `labs/migration-data-quality/DATA_CONTRACT_v0.2.md`
+- `labs/migration-data-quality/TEST_PLAN_v0.2.md`
+
+The v0.2 code and tests have been committed. GitHub Actions run 44176377842 completed successfully on Python 3.12 with 45 regression tests passed and the synthetic CLI fixture completed. Subsequent commits update documentation only. Independent review of the lab and the NIS strategy research brief remains outstanding. The earlier v0.1 contract and test-plan files are retained as historical artifacts.
+
+
+## v0.2 verification update — 17 November 2026
+
+- [x] Tighten the source-local identifier format and add negative tests for email-like, phone-like, whitespace-padded, lowercase and non-ASCII values.
+- [x] Define lexical duplicate semantics, including equivalent timestamp offsets, and document duplicate/metric denominators.
+- [x] Correct provenance collision grouping so invalid record IDs do not create duplicate-source-reference findings.
+- [x] GitHub Actions run **44176377842** passed **45 tests** on Python 3.12 and completed the synthetic CLI fixture. Run URL: https://github.com/Wonderadroit/Wonderadroit/actions/runs/44176377842
+- [ ] Independent review of the code, test semantics and NBMS research brief remains outstanding.
+
+The successful v0.2 run proves only the tested synthetic contract behaviour. It does not prove real-world accuracy, truth, representativeness, operational suitability or production readiness.
+
+
+## Independent-review preparation update — 17 November 2026
+
+- [x] Added `labs/migration-data-quality/REVIEW_REQUEST.md` with two distinct human-review tracks: implementation/data-quality semantics and NBMS policy-source interpretation.
+- [x] The request specifies reviewer independence/conflict disclosure, exact commit/version, evidence-backed findings, test execution, limitations and acceptance criteria.
+- [x] Reconciled the lab README to identify v0.2 as current and the unversioned contract/test-plan files as historical v0.1 artefacts. The review request now asks reviewers to verify consistency across the README, v0.2 documents, implementation and tests.
+- [ ] No independent reviewer has yet been identified or confirmed.
+- [ ] No independent review has been completed. PR #3 remains draft and unmerged.
+
+The review package is preparation for human review, not the review itself. Do not start the compact demonstration dataset/report or dashboard work until both review tracks have been addressed and substantive findings reconciled.
+
+
+## Documentation reconciliation update — 17 November 2026
+
+- [x] Updated `labs/migration-data-quality/README.md` to describe v0.2 and link to the versioned v0.2 contract and test plan.
+- [x] Explicitly labelled `DATA_CONTRACT.md` and `TEST_PLAN.md` as retained historical v0.1 documents.
+- [x] Updated `REVIEW_REQUEST.md` so independent reviewers assess consistency across the current README, v0.2 contract/test plan, implementation and tests rather than a discrepancy that has now been corrected.
+- [ ] Independent technical review and independent NBMS policy-source review remain outstanding. Documentation correction does not close either review gate.
+
+
+
+## Research direction update — 22 November 2026
+
+The research identity and scope are now drafted in `RESEARCH_SCOPE.md`, with three candidate studies and a literature map in `RESEARCH_AGENDA.md`.
+
+**Proposed research identity:** Project Frontier investigates how data governance, digital identity and cybersecurity practices can support trustworthy, rights-respecting and interoperable migration and border-management systems in West Africa.
+
+**Priority 1:** Prepare a methods paper on the synthetic Migration Data Quality Laboratory v0.2. This is not yet a publication-ready paper. Independent technical review and separate policy-source review remain prerequisites.
+
+**Priority 2:** Conduct a structured literature review on digital identity and border technology in West Africa, beginning with the identified work by Ngozi Louis Uzomah and Victor Chidubem Iwuoha.
+
+**Priority 3:** Develop a documentary and synthetic-architecture study of secure, accountable interoperability.
+
+Completed in this update:
+- [x] Drafted research identity and scope.
+- [x] Defined three candidate research questions, methods, evidence boundaries and publication gates.
+- [x] Added a preliminary literature map and source links for Uzomah, Iwuoha and ICMPD.
+- [x] Updated the project README/navigation to reflect the focused research identity.
+
+Still open:
+- [ ] Verify the proposed scope against the full existing source register and legal/policy brief.
+- [ ] Read and annotate full papers, not only abstracts or institutional profiles.
+- [ ] Identify and obtain independent reviewers for the technical lab and policy brief.
+- [ ] Complete the first paper's traceability matrix and manuscript after review.
+
+The literature map is preliminary, not an exhaustive systematic review. The three questions are candidates, not claims of originality. No independent reviewer, institutional partnership or endorsement is recorded.
+
+
+## Literature review milestone — 22 November 2026
+
+A preliminary publisher-source reading pass has been completed for:
+- Uzomah (2024), *European Union border technology in Africa: Experiences en route*.
+- Iwuoha & Doevenspeck (published online 2023; journal issue 2025), *Dilemmas of ‘biometric nationality’*.
+- Iwuoha (2025), *European Biometric Borders and (Im)Mobilities in West Africa*.
+
+Structured notes and follow-up questions are recorded in `RESEARCH_AGENDA.md`.
+
+**Preliminary synthesis:** Frontier should not claim novelty in migration/biometric-border research. A plausible technical contribution to investigate is reproducible, privacy-minimising testing of data quality, provenance, access control and accountability in synthetic migration-information workflows, grounded in the governance and rights concerns raised in the literature.
+
+**Evidence limitation:** This is a first reading pass. The complete Uzomah article and Iwuoha & Doevenspeck article still require full-text reading; legal and institutional claims require primary-source verification; no research gap is yet established.
+
+Next:
+- [ ] Complete full-text annotations for all three studies.
+- [ ] Compare proposed laboratory methods with existing technical standards and research.
+- [ ] Reassess the first paper's contribution after that comparison.
+
+
+## Literature comparison and doctrine update — 22 November 2026
+
+- [x] Adapted CYDRA's evidence principle into a Frontier research doctrine in `METHOD_AND_EVIDENCE_DOCTRINE.md`: “Sources frame. Methods test. Evidence decides. Humans interpret and remain accountable.”
+- [x] Added a preliminary literature comparison in `LITERATURE_COMPARISON.md`, including IOM ECOWAS guidance (2019), IOM's Nigeria migration-data assessment (2013), IOM's Essentials of Migration Data (2026), Ibor et al. (2025), West African biometric-border scholarship, ECOWAS's May 2026 public announcement and Nigeria's data-protection instruments.
+- [x] Identified a current policy-research lead: ECOWAS reported ministerial endorsement of a Border Management Strategy and Action Plan and proposed integration of systems including MIDAS and PISCES. The formal strategy/action plan has not yet been obtained or analysed.
+- [x] Added an evaluation matrix for the synthetic migration-event validator: completeness, validity, consistency, uniqueness/conflict, timeliness, provenance, privacy minimisation and reproducibility.
+
+**Assessment:** No defensible novelty claim or research gap has been established. Migration-data harmonisation and cross-border identity interoperability are already established areas. The first paper remains a candidate bounded design-and-evaluation study, not a publication-ready or independently validated contribution.
+
+Next:
+- [ ] Read the full IOM ECOWAS guidelines, Nigeria 2013 assessment and IOM 2026 Essentials guide, recording page-level requirements.
+- [ ] Complete full-text reading of Ibor et al. and outstanding Uzomah/Iwuoha papers.
+- [ ] Obtain the formal ECOWAS Border Management Strategy and Action Plan referenced in the May 2026 announcement.
+- [ ] Map every v0.2 validator rule and test to the literature-derived requirements and evaluation matrix.
+- [ ] Freeze the exact artefact and obtain independent technical and separate policy review before drafting publication claims.
+
+No tests were run for these documentation-only changes. No email outreach was changed or sent. PR #4 remains draft/unmerged.
+
+
+## Migration Data Quality traceability review — 22 November 2026
+
+- [x] Inspected the v0.2 contract, implementation, both test modules and test plan on branch `project-frontier/migration-data-quality-lab`.
+- [x] Enumerated all **45** recorded tests: 40 in `test_validator.py`, 5 in `test_run_lab.py`.
+- [x] Added `MIGRATION_DATA_QUALITY_TRACEABILITY.md` to map implementation rules and exact tests against completeness, validity, consistency, uniqueness/conflict, timeliness, provenance, privacy minimisation and reproducibility.
+- [x] Recorded what the tests do not establish, including population completeness, truth, external source authenticity, cross-record integrity, operational timeliness, privacy/security assurance, scale, independent reproduction and rights impacts.
+- [x] Reframed the lab accurately as a synthetic contract-validation demonstrator, not a validated migration-data quality framework or assessment of Nigerian/ECOWAS systems.
+
+**Assessment:** The 45-test suite gives meaningful evidence of deterministic behaviour for the narrow synthetic contract. It does not test the quality or completeness of real migration data. No new tests were run in this traceability review, and this review is AI-assisted desk analysis, not independent technical or policy review.
+
+Next:
+- [ ] Obtain human technical review of contract choices, parser/time boundary, duplicate policy, metrics and privacy controls.
+- [ ] Obtain separate policy/data-governance review of the dimensions and their relevance to ECOWAS/Nigeria.
+- [ ] Do not add features or claim a research gap until those reviews and full literature comparison are complete.
+
+PR #4 remains draft and unmerged. No outreach emails were sent or changed.
+
+
+## Regional policy evidence update — 22 November 2026
+
+- [x] Added `REGIONAL_POLICY_EVIDENCE_UPDATE_2026.md` with additional institutional sources from ECOWAS, NIS, ICMPD, ILO and IOM.
+- [x] Recorded ECOWAS's public report that ministers formally endorsed a Border Management Strategy and Action Plan in April 2026, including a stated plan to link systems such as MIDAS and PISCES and a December 2026 target for mutual acceptance of ENBIC.
+- [x] Recorded the NIS public account of the 27–30 September 2026 review workshop for the 2019–2023 NBMS and preparation for the 2027–2031 cycle.
+- [x] Identified FMM West Africa II (2024–2029) and the May 2026 ILO/ECOWAS/IOM regional data-harmonisation workshop as active prior work that Frontier must map.
+- [x] Recorded the IOM 2026 Essentials guide's official catalogue contents. Full-text access was blocked in this review; no chapter-level reading is claimed.
+
+**Research consequence:** Broad claims of novelty in migration-data harmonisation, generic data-quality checks or regional border interoperability are not defensible. The formal ECOWAS strategy, technical annexes, regional assessment and agreed indicator materials remain outstanding. Public announcements establish reported commitments and review activity, not implementation success or system architecture.
+
+Next:
+- [ ] Obtain the formal ECOWAS Border Management Strategy and Action Plan and FMM II regional assessment/indicator materials.
+- [ ] Obtain the complete IOM 2026 guide and annotate page-level requirements.
+- [ ] Obtain the approved/published Nigeria 2027–2031 NBMS when available; until then cite only the NIS workshop account.
+- [ ] Reassess the candidate paper against these existing initiatives before making any novelty or gap claim.
+
+No tests were run. No outreach emails were sent or changed. PR #4 remains draft/unmerged.
+
+
+## Follow-up regional source review — 22 November 2026
+
+- [x] Repeated the search for the formal ECOWAS Border Management Strategy and Action Plan, FMM II regional assessments, Praia indicator materials and supporting documents.
+- [x] Added the publicly accessible FMM II programme factsheet and Demand Driven Facility guidelines to the regional evidence update.
+- [x] Located ILO's November 2025 account of ECOWAS/ILO validation of a labour-migration data roadmap and harmonised indicators, predating the May 2026 Praia workshop.
+- [x] Located ECOWAS's August 2026 account of its sixth regional migration-statistics coordination meeting and review/validation of the third Regional Report on International Migration in West Africa.
+
+**Updated assessment:** Regional migration-data quality, indicator harmonisation, border management and legal-identity management are clearly established institutional workstreams. Frontier should not create or claim ownership of another generic framework. The only sensible next research step is a bounded requirements-to-evidence comparison of the existing synthetic validator against published standards and accessible institutional guidance, followed by independent review.
+
+Still unavailable for direct analysis in this search:
+- [ ] The actual ECOWAS Border Management Strategy and Action Plan and annexes.
+- [ ] The 2026 FMM II regional assessment reports.
+- [ ] The Praia workshop's agreed indicator list and technical training materials.
+- [ ] The revised ECOWAS migration-data guidelines and third Regional Report.
+- [ ] Full text of IOM's 2026 Essentials guide.
+
+The search did not establish that these documents do not exist or cannot be obtained through institutional channels. No novelty/gap claim is made. No tests were run. PR #4 remains draft and unmerged.
+
+
+## Standards-to-laboratory comparison — 22 November 2026
+
+- [x] Compared the v0.2 contract and test-plan claims with publicly accessible material from ISO 8000-1, ISO/TS 8000-82, ISO/IEC 25024, ISO 8000-8, the UN Statistics Division's 2025 handbook discussion of statistical quality frameworks, NIST Privacy Framework 1.1 guidance, NIST SP 800-53 Rev. 5 and W3C PROV-O.
+- [x] Added `STANDARDS_TO_LAB_TRACEABILITY.md` with a concern-to-evidence matrix and explicit boundaries.
+
+**Finding:** v0.2 is best described as a narrow synthetic record-rule/contract demonstrator. It partially addresses syntactic validity, schema completeness, selected consistency/uniqueness rules, a limited ingestion-lag measure, deterministic outputs and privacy-by-schema constraints. It does not measure truth/accuracy, population completeness, representativeness, statistical methodological soundness, source authenticity, institutional governance, security-control effectiveness or rights impacts.
+
+**Important:** This is not ISO/NIST conformity, statistical validation, certification or independent review. Full ISO standards were not inspected clause by clause; public abstracts/previews and framework guidance were used. The implementation was not re-read line by line and tests were not rerun in this pass.
+
+Next decision: do not add features. Obtain independent technical/data-quality review of the existing rules and denominators, and separate migration-statistics/policy review of contextual relevance. Reassess whether a publishable contribution remains after those reviews and fuller standards/literature reading.
+
+
+## Literature and UN NQAF follow-up — 22 November 2026
+
+- [x] Inspected the full publisher-hosted Iwuoha (2025) article in substantial sections, including its qualitative methodology, sample description, conceptual framing and conclusion.
+- [x] Rechecked Uzomah (2024): the accessible publisher content exposed the abstract and metadata, not the complete article; full-text review remains open.
+- [x] Rechecked Iwuoha & Doevenspeck (2023 online / 2025 issue): publisher abstract and notes were accessible; full-text review remains open.
+- [x] Inspected the UN Statistics Division's 2019 National Quality Assurance Frameworks Manual and recorded its four levels: statistical system, institutional environment, statistical processes and statistical outputs.
+- [x] Added `LITERATURE_AND_NQAF_FOLLOWUP_2026.md` with source-attributed annotations, methodology boundaries and consequences for Frontier's research scope.
+
+**Updated assessment:** The UN NQAF is a system-wide official-statistics quality framework, not a record-validation checklist. Frontier's v0.2 validator operates at the narrow record/contract level. It cannot establish source authenticity, population completeness, statistical representativeness, end-to-end production quality or institutional governance. The research question has been narrowed accordingly, but remains a candidate rather than a novelty claim.
+
+**No implementation changes:** No code or test changes were made; no tests were run. No independent review or fieldwork was conducted. PR #4 remains draft and unmerged.
+
+
+## Portfolio alignment and repository hygiene — 22 November 2026
+
+- [x] Added `RESEARCH_PORTFOLIO_ARCHITECTURE.md` to define the relationship and boundaries between CYDRA Web3 and Project Frontier.
+- [x] Linked the portfolio architecture from the Frontier README.
+- [x] Explicitly kept the projects separate: CYDRA is a technical authorization-security research engine; Frontier is a multidisciplinary migration-data, digital-identity and technology-governance research programme.
+- [x] Recorded transferable methods without transferring or conflating evidence: version pinning, provenance, paired controls, fail-closed handling, reproducibility and honest limitations.
+
+**Next:** Continue the Frontier requirements-to-evidence comparison and literature reading. Keep the existing v0.2 lab stable pending independent technical and policy review. The email/outreach thread is outside repository work and has not been opened, edited, replied to or followed up as part of this update.
+
+No code or tests changed or ran in this documentation-only update. PR #4 remains draft and unmerged.
