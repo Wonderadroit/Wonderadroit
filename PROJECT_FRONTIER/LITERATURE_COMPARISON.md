@@ -107,3 +107,34 @@ This is a description of the work, not a novelty claim. The paper should be subm
 ## 8. Review caveat
 
 This is a selective preliminary comparison based on the source material listed above. It is not a systematic review, legal opinion, security assessment, or evidence of any agency's current system condition. Claims about implementation, operational performance, legal compliance or novelty require further primary evidence and qualified independent review.
+
+
+## 9. Full-text reading note — Ibor et al. (2025)
+
+**Source:** Ibor, A., Hooper, M., Maple, C., Crowcroft, J. & Epiphaniou, G. (2025). *Considerations for trustworthy cross-border interoperability of digital identity systems in developing countries*. AI & Society, 40, 2729–2750. DOI: 10.1007/s00146-024-02008-9. Open full text inspected via PubMed Central.
+
+### Research purpose and method visible in the paper
+
+The authors examine requirements and challenges for trustworthy cross-border interoperability of foundational identity systems in developing-country/African settings. They compare two existing interoperability approaches—Estonia's X-Road and the EU's eIDAS—and propose a process-based way to scope requirements across identity-management stages. The paper is a conceptual/technical requirements analysis, not an empirical evaluation of ECOWAS or Nigerian operational systems.
+
+### Important distinctions for Frontier
+
+1. **Data exchange is not identity proofing.** The paper explicitly notes that X-Road does not verify or validate end-user identity data; it provides a secure data-exchange layer. Frontier must not conflate a secure connection or interoperable message with proof that an identity claim is true.
+2. **Organisational access is not end-user authorisation.** The paper explains that X-Road's infrastructure addresses organisational-level access, while the service client remains responsible for end-user authorisation inside its own information system. This is a useful design distinction for Frontier's security-control matrix.
+3. **Trust is sociotechnical and legal.** The paper discusses bilateral agreements, differing laws, dispute resolution, certification compatibility, assurance levels and trust relationships, in addition to cryptographic controls.
+4. **Auditability and accountability matter.** Its discussion of signed, timestamped message exchange provides a comparator for evidence of data exchange, while warning that trust-service configuration and certificate-status differences can affect assurance.
+5. **Interoperability does not remove privacy risk.** The authors identify risks where a partner organisation's weak internal access management could expose shared data. This supports least-privilege, purpose-bound access, logging and partner accountability as requirements to investigate—not as controls already proven by Frontier.
+
+### Direct implications for the Frontier workstreams
+
+- The digital identity verifier should make a strictly limited claim about the integrity and validation of a fictional credential under its configured rules. It must not claim to prove a person's real identity or legal status.
+- The secure-interoperability study should separate at least four layers: identity proofing/credential issuance; authentication and assertions; secure message/data exchange; and authorisation within the receiving organisation.
+- A synthetic architecture experiment could test whether an event exchange records the sender, recipient, purpose, timestamp, schema version and access decision without exposing unnecessary identity data. This is a possible future experiment, not yet designed or validated.
+- A governance matrix should include trust agreements, assurance levels, revocation/status checking, end-user authorisation, dispute handling, audit evidence and privacy safeguards.
+
+### Limitations
+
+The paper compares X-Road and eIDAS and proposes requirements for African settings; it does not establish the actual architecture, legal basis, security posture or operational performance of Nigeria's or ECOWAS's systems. Its broad African framing should not be treated as uniform evidence across countries. The paper itself notes that other interoperability solutions were not considered.
+
+**Reading status:** Full-text page reviewed, including introduction, X-Road/eIDAS comparison, challenges, trust relationships and assurance-level sections. A final manuscript-quality annotation should still capture the conclusion and references in full.
+
