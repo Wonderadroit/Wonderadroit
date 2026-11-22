@@ -89,3 +89,45 @@ Potential paper design:
 ## 5. Review status and limitations
 
 This is AI-assisted documentary research using public institutional publications and announcements. No interviews, privileged documents, operational system access, independent expert review or new laboratory tests were performed. Institutional announcements are evidence of what the institution publicly reported, not independent verification that a policy or system has been implemented successfully.
+
+
+## 6. Follow-up source search — 22 November 2026
+
+A second search targeted the formal strategy, FMM II assessment, regional indicator list and supporting technical materials.
+
+### 6.1 Formal ECOWAS Border Management Strategy and Action Plan
+
+The ECOWAS publication and policy navigation pages identify where formal policy documents and final communiqués are published, but the search did not locate a publicly accessible copy of the specific Border Management Strategy and Action Plan endorsed on 29 April 2026. The ECOWAS news release remains the only directly inspected source for the endorsement and its publicly described priorities. The strategy's text, annexes, implementation matrix, financing model and governance arrangements remain **not inspected**. This is a search limitation, not proof that the document is unpublished or unavailable on request.
+
+### 6.2 FMM II programme materials now accessible
+
+The ICMPD FMM II project page confirms the programme runs from May 2024 to May 2029 and identifies migration-data management, border management and legal identity management among its work areas. Its publicly linked 2025 factsheet further describes three levels of activity: strengthening ECOWAS Commission capacities; strengthening national institutional capacities, including migration data collection/management and border/legal identity management; and supporting non-state actors/local authorities with migrant information and protection. The linked Demand Driven Facility guidelines describe technical assistance for national institutions and explicitly frame assistance around institutional gaps and avoiding duplication of existing initiatives.
+
+These are programme-design and public project materials. They do not substitute for the underlying 2026 regional assessments or prove the state of implementation in any country.
+
+Sources:
+- ICMPD, FMM West Africa II project page: https://www.icmpd.org/our-work/projects/support-to-the-free-movement-of-persons-and-migration-in-west-africa-fmm-west-africa-ii
+- ICMPD, FMM West Africa II factsheet: https://www.icmpd.org/file/download/64434/file/Factsheet%2520-%2520FMM%2520West%2520Africa%2520II.pdf
+- ICMPD, Demand Driven Facility guidelines: https://www.icmpd.org/admin/content/download/64424/file/Guidelines%20%E2%80%93%20FMM%20West%20Africa%20II%20Demand%20Driven%20Facility%20Technical%20Assistance%20for%20National%20Institutions.pdf?version=3
+
+### 6.3 Regional indicator work predates the May 2026 workshop
+
+An ILO release dated 21 November 2025 reports that ECOWAS and ILO validated a roadmap and harmonised labour-migration indicators at a regional meeting held in Niger State, Nigeria, from 28–30 October 2025, involving experts/statisticians from 11 ECOWAS Member States. The May 2026 Praia workshop then reports agreement on a core set of regional migration indicators and a taskforce to finalise revised ECOWAS migration-data guidelines.
+
+This sequence matters: indicator harmonisation was already an active, multi-stage regional workstream before the May 2026 training. Frontier cannot credibly present a regional indicator set or harmonisation framework as its own contribution. The actual indicator definitions, metadata, disaggregation rules, data sources, quality criteria and adoption status have not been inspected in this review.
+
+Sources:
+- ILO, 21 November 2025: https://www.ilo.org/resource/news/ilo-and-ecowas-chart-new-course-labour-market-and-migration-data-west
+- ILO, 8 May 2026: https://www.ilo.org/resource/news/west-africa-strengthens-migration-governance-through-landmark-regional
+
+### 6.4 ECOWAS migration statistics work in August 2026
+
+An ECOWAS release dated 20 August 2026 reports a regional coordination meeting on availability, quality and comparability of migration indicators, with review/validation of the third edition of the Regional Report on International Migration in West Africa. The release does not provide the report or indicator specifications. It is further evidence that regional statistical quality and comparability are already institutional priorities.
+
+Source: ECOWAS, 20 August 2026: https://www.ecowas.int/ecowas-strengthens-the-harmonization-of-migration-data-and-macroeconomic-convergence-in-west-africa/
+
+### 6.5 Updated assessment
+
+The newly inspected materials strengthen the conclusion that broad migration-data quality, indicator harmonisation, border management and legal-identity management are already addressed by ECOWAS and FMM II. The defensible next step is not to create another generic migration-data framework. It is to complete a requirements-to-evidence comparison of the narrow synthetic validator against published standards and accessible institutional guidance, and then determine whether any specific assurance question remains unanswered.
+
+No gap or novelty claim is established. The formal ECOWAS strategy, 2026 FMM II regional assessments, Praia indicator set/training materials, revised ECOWAS data guidelines and third Regional Report remain outstanding source requests. Search results and institutional announcements are not substitutes for reading those underlying materials.
