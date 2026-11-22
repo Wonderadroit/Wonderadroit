@@ -260,3 +260,15 @@ Still unavailable for direct analysis in this search:
 - [ ] Full text of IOM's 2026 Essentials guide.
 
 The search did not establish that these documents do not exist or cannot be obtained through institutional channels. No novelty/gap claim is made. No tests were run. PR #4 remains draft and unmerged.
+
+
+## Standards-to-laboratory comparison — 22 November 2026
+
+- [x] Compared the v0.2 contract and test-plan claims with publicly accessible material from ISO 8000-1, ISO/TS 8000-82, ISO/IEC 25024, ISO 8000-8, the UN Statistics Division's 2025 handbook discussion of statistical quality frameworks, NIST Privacy Framework 1.1 guidance, NIST SP 800-53 Rev. 5 and W3C PROV-O.
+- [x] Added `STANDARDS_TO_LAB_TRACEABILITY.md` with a concern-to-evidence matrix and explicit boundaries.
+
+**Finding:** v0.2 is best described as a narrow synthetic record-rule/contract demonstrator. It partially addresses syntactic validity, schema completeness, selected consistency/uniqueness rules, a limited ingestion-lag measure, deterministic outputs and privacy-by-schema constraints. It does not measure truth/accuracy, population completeness, representativeness, statistical methodological soundness, source authenticity, institutional governance, security-control effectiveness or rights impacts.
+
+**Important:** This is not ISO/NIST conformity, statistical validation, certification or independent review. Full ISO standards were not inspected clause by clause; public abstracts/previews and framework guidance were used. The implementation was not re-read line by line and tests were not rerun in this pass.
+
+Next decision: do not add features. Obtain independent technical/data-quality review of the existing rules and denominators, and separate migration-statistics/policy review of contextual relevance. Reassess whether a publishable contribution remains after those reviews and fuller standards/literature reading.
