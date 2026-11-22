@@ -272,3 +272,16 @@ The search did not establish that these documents do not exist or cannot be obta
 **Important:** This is not ISO/NIST conformity, statistical validation, certification or independent review. Full ISO standards were not inspected clause by clause; public abstracts/previews and framework guidance were used. The implementation was not re-read line by line and tests were not rerun in this pass.
 
 Next decision: do not add features. Obtain independent technical/data-quality review of the existing rules and denominators, and separate migration-statistics/policy review of contextual relevance. Reassess whether a publishable contribution remains after those reviews and fuller standards/literature reading.
+
+
+## Literature and UN NQAF follow-up — 22 November 2026
+
+- [x] Inspected the full publisher-hosted Iwuoha (2025) article in substantial sections, including its qualitative methodology, sample description, conceptual framing and conclusion.
+- [x] Rechecked Uzomah (2024): the accessible publisher content exposed the abstract and metadata, not the complete article; full-text review remains open.
+- [x] Rechecked Iwuoha & Doevenspeck (2023 online / 2025 issue): publisher abstract and notes were accessible; full-text review remains open.
+- [x] Inspected the UN Statistics Division's 2019 National Quality Assurance Frameworks Manual and recorded its four levels: statistical system, institutional environment, statistical processes and statistical outputs.
+- [x] Added `LITERATURE_AND_NQAF_FOLLOWUP_2026.md` with source-attributed annotations, methodology boundaries and consequences for Frontier's research scope.
+
+**Updated assessment:** The UN NQAF is a system-wide official-statistics quality framework, not a record-validation checklist. Frontier's v0.2 validator operates at the narrow record/contract level. It cannot establish source authenticity, population completeness, statistical representativeness, end-to-end production quality or institutional governance. The research question has been narrowed accordingly, but remains a candidate rather than a novelty claim.
+
+**No implementation changes:** No code or test changes were made; no tests were run. No independent review or fieldwork was conducted. PR #4 remains draft and unmerged.
