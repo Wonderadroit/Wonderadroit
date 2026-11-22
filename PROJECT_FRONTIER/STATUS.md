@@ -166,3 +166,22 @@ Still open:
 - [ ] Complete the first paper's traceability matrix and manuscript after review.
 
 The literature map is preliminary, not an exhaustive systematic review. The three questions are candidates, not claims of originality. No independent reviewer, institutional partnership or endorsement is recorded.
+
+
+## Literature review milestone — 22 November 2026
+
+A preliminary publisher-source reading pass has been completed for:
+- Uzomah (2024), *European Union border technology in Africa: Experiences en route*.
+- Iwuoha & Doevenspeck (published online 2023; journal issue 2025), *Dilemmas of ‘biometric nationality’*.
+- Iwuoha (2025), *European Biometric Borders and (Im)Mobilities in West Africa*.
+
+Structured notes and follow-up questions are recorded in `RESEARCH_AGENDA.md`.
+
+**Preliminary synthesis:** Frontier should not claim novelty in migration/biometric-border research. A plausible technical contribution to investigate is reproducible, privacy-minimising testing of data quality, provenance, access control and accountability in synthetic migration-information workflows, grounded in the governance and rights concerns raised in the literature.
+
+**Evidence limitation:** This is a first reading pass. The complete Uzomah article and Iwuoha & Doevenspeck article still require full-text reading; legal and institutional claims require primary-source verification; no research gap is yet established.
+
+Next:
+- [ ] Complete full-text annotations for all three studies.
+- [ ] Compare proposed laboratory methods with existing technical standards and research.
+- [ ] Reassess the first paper's contribution after that comparison.
